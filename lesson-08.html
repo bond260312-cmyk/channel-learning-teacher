@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>奇哥 AI 學習站｜Lesson 8</title>
+  <title>AI 學習站｜Lesson 8</title>
   <style>
     :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
     *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
@@ -12,8 +12,8 @@
 <body>
   <div class="wrap">
     <section class="topbar">
-      <div class="pill">Lesson 8 / Tools, Memory & Workflow</div>
-      <h1>Lesson 8｜工具、記憶、workflow 如何串起來？</h1>
+      <div class="pill">Lesson 8 / Tools, Memory & 流程</div>
+      <h1>Lesson 8｜工具、記憶、流程 如何串起來？</h1>
       <p>一個真正能幹活的 AI Agent，靠的不是它「懂多少」，而是它「怎麼記、怎麼用工具、怎麼推進流程」。這堂課我們直接拆解這個鐵三角。</p>
       <div class="progress">
         <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
@@ -35,7 +35,7 @@
         <h3>1. 記憶 (Memory)：從金魚腦到專業幕僚</h3>
         <p>普通的 LLM 關掉視窗就失憶。但在我們的架構中，記憶被實體化為檔案：</p>
         <ul class="dense-list">
-          <li><strong>長期記憶 (MEMORY.md)：</strong> 記住奇哥的鐵律、課程的終極目標、不可踩的紅線。</li>
+          <li><strong>長期記錄：</strong> 記住學習重點、課程目標與需要長期保留的關鍵資訊。</li>
           <li><strong>短期/課程記憶 (學習記錄)：</strong> 記住現在做到第幾步、有哪些 Blockers、下一步該做什麼。</li>
         </ul>
       </div>
@@ -50,7 +50,7 @@
           </ul>
         </div>
         <div class="note-box">
-          <h3>3. 流程 (Workflow)</h3>
+          <h3>3. 流程 (流程)</h3>
           <p>把記憶和工具串起來的繩子。標準的 Agent 流程是：</p>
           <ol class="dense-list">
             <li><strong>讀取記憶：</strong> 看看我是誰、現在進度在哪。</li>
@@ -94,7 +94,7 @@
         <button class="quiz-option" data-choice="c">因為它讓 AI 從「純文字生成」跨越到「對系統、檔案與網路進行實際讀寫與操作」</button>
       </div>
       <div class="q" data-answer="a">
-        <h3>3. 流程 (Workflow) 的最後一個標準動作通常是什麼？</h3>
+        <h3>3. 流程 (流程) 的最後一個標準動作通常是什麼？</h3>
         <button class="quiz-option" data-choice="a">更新進度狀態（寫回記憶或 學習記錄），形成閉環</button>
         <button class="quiz-option" data-choice="b">隨機猜測下一個指令</button>
         <button class="quiz-option" data-choice="c">關閉電腦</button>
@@ -116,7 +116,7 @@
         <div class="mini">
           <h3>龐德的見解</h3>
           <p>沒有記憶的 Agent 是瞎子，沒有工具的 Agent 是殘廢，沒有流程的 Agent 是一盤散沙。</p>
-          <p>我們在 這個教學系統 打造的，是把這三者鎖死在一個標準的工程框架內：<strong>用記憶對齊標準，用工具抓取真相，用流程確保交付。這才是自動化的本質。</strong></p>
+          <p>把記錄、工具與流程結合起來，目的就是讓系統能穩定完成任務，而不是只停留在一次性的回答。</p>
         </div>
       </div>
       <div class="actions">

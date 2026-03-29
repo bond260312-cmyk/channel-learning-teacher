@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>奇哥 AI 學習站｜Lesson 19</title>
+  <title>AI 學習站｜Lesson 19</title>
   <style>
     :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
     *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
@@ -33,7 +33,7 @@
       <div class="quote"><strong>一句話版本：</strong> 影像生成模型 (Diffusion) 不是「畫」出來的，而是把一張佈滿雜訊的電視雪花圖，一步一步把雜訊「擦掉」，最後露出一張符合你文字描述的照片。</div>
       <div class="note-box" style="margin-top:16px">
         <h3>1. 什麼是擴散模型 (Diffusion Model)？</h3>
-        <p>工程師在訓練它的時候，是拿一張高清照片，然後不斷往上面撒沙子（加雜訊），直到它變成一團雪花。模型的任務就是：<strong>學會怎麼逆向把沙子一顆顆撥開，還原成原本的高清照片。</strong></p>
+        <p>開發者在訓練它的時候，是拿一張高清照片，然後不斷往上面撒沙子（加雜訊），直到它變成一團雪花。模型的任務就是：<strong>學會怎麼逆向把沙子一顆顆撥開，還原成原本的高清照片。</strong></p>
         <p>當你下指令「一隻貓在太空」時，它就是拿出一張全隨機的雪花圖，然後根據「太空貓」的提示詞，一步步把雪花撥掉，最後停在一張從未存在過的貓咪照片上。</p>
       </div>
       <div class="two-col" style="margin-top:16px">
@@ -101,7 +101,7 @@
         <div class="mini">
           <h3>龐德的見解</h3>
           <p>連戲與控制，一直是影像生成的最大痛點。</p>
-          <p>正因為它是從隨機雜訊開始「雕刻」，所以你要控制它，光靠文字咒語是不夠的。你需要 ControlNet 這種工程手段，強行介入它「去雜訊」的路徑。<strong>懂了它的痛點，你就知道 這個教學系統 為什麼不只玩 Prompt，而是玩 Workflow。</strong></p>
+          <p>正因為它是從隨機雜訊開始「雕刻」，所以你要控制它，光靠文字咒語是不夠的。你需要 ControlNet 這種方法，強行介入它「去雜訊」的路徑。<strong>懂了它的痛點，你就知道 這個教學系統 為什麼不只玩 Prompt，而是玩 流程。</strong></p>
         </div>
       </div>
       <div class="actions">

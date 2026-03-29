@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>奇哥 AI 學習站｜Lesson 7</title>
+  <title>AI 學習站｜Lesson 7</title>
   <style>
     :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
     *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
@@ -12,9 +12,9 @@
 <body>
   <div class="wrap">
     <section class="topbar">
-      <div class="pill">Lesson 7 / OpenClaw Workflow</div>
-      <h1>Lesson 7｜OpenClaw 的 agent workflow 長什麼樣？</h1>
-      <p>前面學了那麼多 Context Engineering 和 Agent 理論，今天我們把它落地：看看你每天用的<strong>OpenClaw</strong>到底怎麼運作的？為什麼它不是單純的聊天機器人？</p>
+      <div class="pill">Lesson 7 / AI Agent 系統 流程</div>
+      <h1>Lesson 7｜AI Agent 系統 的 agent 流程 長什麼樣？</h1>
+      <p>前面學了那麼多 Context Engineering 和 Agent 理論，今天我們把它落地：看看你每天用的<strong>AI Agent 系統</strong>到底怎麼運作的？為什麼它不是單純的聊天機器人？</p>
       <div class="progress">
         <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
         <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
@@ -31,10 +31,10 @@
 
     <section id="step1" class="card lesson-step active">
       <h2>Step 1｜不只是對話框，是一個具備「手腳」的環境</h2>
-      <div class="quote"><strong>一句話版本：</strong> ChatGPT 是陪你聊天的「大腦」，而 OpenClaw 是一個掛載了「手腳（Tools）」、「記憶（Memory）」和「辦公桌（Workspace）」的完整工作站。</div>
+      <div class="quote"><strong>一句話版本：</strong> ChatGPT 是陪你聊天的「大腦」，而 AI Agent 系統 是一個掛載了「手腳（Tools）」、「記憶（Memory）」和「辦公桌（Workspace）」的完整工作站。</div>
       <div class="note-box" style="margin-top:16px">
-        <h3>OpenClaw Workflow 的三大核心引擎</h3>
-        <p>當你對龐德（OpenClaw Agent）下達一個複雜指令時，它不會一次把答案「想」出來，而是進入一個**「觀察 → 思考 → 行動」**的循環（ReAct 模式）：</p>
+        <h3>AI Agent 系統 流程 的三大核心引擎</h3>
+        <p>當你對龐德（AI Agent 系統 Agent）下達一個複雜指令時，它不會一次把答案「想」出來，而是進入一個**「觀察 → 思考 → 行動」**的循環（ReAct 模式）：</p>
         <ol class="dense-list">
           <li><strong>Tools (工具權限)：</strong>它可以自己打指令去 <code>ls</code>、<code>cat</code>、<code>grep</code> 檔案，或去網路上 <code>scrapling</code> 爬資料。</li>
           <li><strong>Workspace (實體辦公桌)：</strong>它有真正的寫入權限，可以把算好的結果、寫好的程式碼，直接建立在 <code>/Users/bilien030/...</code> 下，甚至推上 GitHub。</li>
@@ -52,20 +52,20 @@
           </ul>
         </div>
         <div class="note-box">
-          <h3>OpenClaw 的 Workflow</h3>
+          <h3>AI Agent 系統 的 流程</h3>
           <ul class="dense-list">
             <li>收到任務 → 分析目標</li>
             <li>呼叫 <code>exec</code> 檢查目前資料夾有什麼檔案</li>
             <li>呼叫 <code>read</code> 看檔案內容</li>
             <li>如果缺資料，用 <code>web_search</code> 找</li>
             <li>呼叫 <code>write</code> 寫出新檔案或腳本</li>
-            <li>回報「奇哥，檔案我放桌上了」</li>
+            <li>回報「檔案我放桌上了」</li>
           </ul>
         </div>
       </div>
       <div class="note-box" style="margin-top:16px">
-        <h3>為什麼我們要用 OpenClaw 建戰隊？</h3>
-        <p>因為真實的商業課程（如：多機位自動初剪引擎、VIYANG 提案）不是靠聊天能完成的。我們需要的是能「落地產出 Artifacts (實體產出物)」的系統。這就是 Workflow 的威力——<strong>它把語言模型變成了作業系統的 CPU。</strong></p>
+        <h3>為什麼我們要用 AI Agent 系統 建戰隊？</h3>
+        <p>因為真實的商業課程（如：多機位自動初剪引擎、VIYANG 提案）不是靠聊天能完成的。我們需要的是能「落地產出 Artifacts (實體產出物)」的系統。這就是 流程 的威力——<strong>它把語言模型變成了作業系統的 CPU。</strong></p>
       </div>
       <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
     </section>
@@ -74,7 +74,7 @@
       <h2>Step 2｜你先說</h2>
       <p>請你回答：</p>
       <ul class="dense-list">
-        <li>在你與龐德（OpenClaw）合作的這段時間裡，你覺得它跟普通的 ChatGPT 或 Claude 網頁版，最明顯的「行為差異」是什麼？</li>
+        <li>在你與龐德（AI Agent 系統）合作的這段時間裡，你覺得它跟普通的 ChatGPT 或 Claude 網頁版，最明顯的「行為差異」是什麼？</li>
         <li>它能直接幫你產出什麼東西到你的電腦裡？</li>
       </ul>
       <textarea id="selfExplain" placeholder="先講你的體驗。想想你這幾天是怎麼跟龐德工作的。"></textarea>
@@ -89,19 +89,19 @@
       <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3 就過關。</p>
       <div class="q" data-answer="b">
-        <h3>1. 在 OpenClaw 中，Agent 解決複雜問題的方式是什麼？</h3>
+        <h3>1. 在 AI Agent 系統 中，Agent 解決複雜問題的方式是什麼？</h3>
         <button class="quiz-option" data-choice="a">一次性生成一大串文字回答，要你自己複製貼上</button>
         <button class="quiz-option" data-choice="b">進入「思考 → 呼叫工具 (如看檔案、搜尋) → 行動 (如寫入檔案)」的循環</button>
         <button class="quiz-option" data-choice="c">把問題丟給其他真人來回答</button>
       </div>
       <div class="q" data-answer="c">
-        <h3>2. OpenClaw 的 Workspace（辦公桌）代表什麼意義？</h3>
+        <h3>2. AI Agent 系統 的 Workspace（辦公桌）代表什麼意義？</h3>
         <button class="quiz-option" data-choice="a">只是一個虛擬概念，用來聊天</button>
         <button class="quiz-option" data-choice="b">代表它只能看你的螢幕截圖</button>
         <button class="quiz-option" data-choice="c">代表它具有對你電腦特定資料夾的讀寫權限，能直接建立課程和修改檔案</button>
       </div>
       <div class="q" data-answer="b">
-        <h3>3. 如果任務太複雜，OpenClaw 的 Agent 可以怎麼做？</h3>
+        <h3>3. 如果任務太複雜，AI Agent 系統 的 Agent 可以怎麼做？</h3>
         <button class="quiz-option" data-choice="a">直接放棄並顯示 Error 500</button>
         <button class="quiz-option" data-choice="b">Spawn (生成) 一個子 Agent 去處理特定任務，自己則等待結果交接</button>
         <button class="quiz-option" data-choice="c">要求你必須重買更高階的顯示卡</button>
@@ -122,7 +122,7 @@
         </div>
         <div class="mini">
           <h3>龐德的見解</h3>
-          <p>ChatGPT 是顧問，只會出張嘴；而 OpenClaw 的 Agent 是你的員工，可以捲起袖子幹活。<strong>掌握這套 Workflow，你就是在帶領一支不知疲倦的全端工程團隊。</strong></p>
+          <p>ChatGPT 是顧問，只會出張嘴；而 AI Agent 系統 的 Agent 是你的員工，可以捲起袖子幹活。<strong>掌握這套 流程，你就是在帶領一支不知疲倦的全端工程團隊。</strong></p>
         </div>
       </div>
       <div class="actions">
@@ -135,7 +135,7 @@
     let currentStep = 1;
     let savedAnswer = '';
     function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
-    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先講你的體驗，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('檔案')||text.includes('寫入')||text.includes('桌面上')||text.includes('實體'))) notes.push('提醒：OpenClaw 最核心的差異是它能直接對「檔案與系統」進行讀寫，產出實體。');if(!(text.includes('工具')||text.includes('步驟')||text.includes('自己做')||text.includes('指令'))) notes.push('提醒：它具備呼叫工具的能力，不是一次把話講完，而是一步步執行。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>體驗非常準確，這就是你每天在帶的 Agent 團隊。')+'<br><br>現在進小測。';setTimeout(()=>goStep(3),500);}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先講你的體驗，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('檔案')||text.includes('寫入')||text.includes('桌面上')||text.includes('實體'))) notes.push('提醒：AI Agent 系統 最核心的差異是它能直接對「檔案與系統」進行讀寫，產出實體。');if(!(text.includes('工具')||text.includes('步驟')||text.includes('自己做')||text.includes('指令'))) notes.push('提醒：它具備呼叫工具的能力，不是一次把話講完，而是一步步執行。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>體驗非常準確，這就是你每天在帶的 Agent 團隊。')+'<br><br>現在進小測。';setTimeout(()=>goStep(3),500);}
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
     function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
   </script>
