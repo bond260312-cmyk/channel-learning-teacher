@@ -22,11 +22,11 @@
       <div class="step-nav">
         <div class="step-chip active" data-step-chip="1">1 講解</div>
         <div class="step-chip" data-step-chip="2">2 你先說</div>
-        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="3">3 小測</div>
         <div class="step-chip" data-step-chip="4">4 複習卡</div>
       </div>
       <a class="back-link" href="./index.html">← 回課程入口</a>
-      <a class="back-link" style="margin-left:12px" href="../../index.html">← 回總入口</a>
+      <a class="back-link" style="margin-left:12px" href="./index.html">← 回首頁</a>
     </section>
 
     <section id="step1" class="card lesson-step active">
@@ -44,7 +44,7 @@
       </div>
       <div class="two-col" style="margin-top:16px">
         <div class="note-box">
-          <h3>被放大的黃金區：定義與驗收</h3>
+          <h3>被放大的黃金區：定義與小測</h3>
           <p>真正會被 AI 放大的能力，是這三種：</p>
           <ol class="dense-list">
             <li><strong>拆解問題的能力：</strong>能把一個模糊的商業目標，拆成 5 個 AI 能聽懂的步驟。</li>
@@ -56,7 +56,7 @@
       <div class="note-box" style="margin-top:16px">
         <h3>超級個體（Super Individual）的誕生</h3>
         <p>過去你需要開一間公司，雇十個人，才能同時兼顧開發、寫案、剪片、發文。現在，只要你具備「頂層設計」的能力，你一個人就能指揮十個 Agent。你的產能被放大了 10 倍甚至 100 倍。</p>
-        <p>這就是為什麼我們要在 BeeBond 導入 Agentic Workflow——<strong>我們要的不是取代戰隊成員，而是把每個人都升級成能帶領 Agent 的指揮官。</strong></p>
+        <p>這就是為什麼我們要在 這個教學系統 導入 Agentic Workflow——<strong>我們要的不是取代戰隊成員，而是把每個人都升級成能帶領 Agent 的指揮官。</strong></p>
       </div>
       <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
     </section>
@@ -65,8 +65,8 @@
       <h2>Step 2｜你先說</h2>
       <p>請你回答：</p>
       <ul class="dense-list">
-        <li>在你目前的 BeeBond 戰隊業務中，有哪些環節是屬於「會被取代的中間件工作」？</li>
-        <li>又有哪些環節是「絕對需要奇哥或核心成員親自驗收、定義標準」的？</li>
+        <li>在你目前的 這個教學系統 戰隊任務中，有哪些環節是屬於「會被取代的中間件工作」？</li>
+        <li>又有哪些環節是「絕對需要奇哥或核心成員親自小測、定義標準」的？</li>
       </ul>
       <textarea id="selfExplain" placeholder="先講你的版本。請代入我們接案或製作的真實情境。"></textarea>
       <div class="actions">
@@ -77,11 +77,11 @@
     </section>
 
     <section id="step3" class="card lesson-step">
-      <h2>Step 3｜驗收問題</h2>
+      <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3 就過關。</p>
       <div class="q" data-answer="b">
         <h3>1. 什麼樣的工作最容易被 AI Agent 取代？</h3>
-        <button class="quiz-option" data-choice="a">需要高情商溝通與說服客戶的談判工作</button>
+        <button class="quiz-option" data-choice="a">需要高情商溝通與說服學習者的談判工作</button>
         <button class="quiz-option" data-choice="b">規則明確、只需將資料從 A 格式轉為 B 格式的「純搬磚」工作</button>
         <button class="quiz-option" data-choice="c">為課程最終成敗負起法律與商業責任的工作</button>
       </div>
@@ -127,7 +127,7 @@
     let currentStep = 1;
     let savedAnswer = '';
     function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
-    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('取代')||text.includes('搬磚')||text.includes('中間件')||text.includes('整理'))) notes.push('提醒：單純的資料搬運與格式轉換，就是最容易被取代的中間件工作。');if(!(text.includes('驗收')||text.includes('標準')||text.includes('責任')||text.includes('判斷'))) notes.push('提醒：人類的核心價值在於設立標準與承擔最終決策。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>觀念完全正確，你已經抓到了未來工作價值的核心。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('取代')||text.includes('搬磚')||text.includes('中間件')||text.includes('整理'))) notes.push('提醒：單純的資料搬運與格式轉換，就是最容易被取代的中間件工作。');if(!(text.includes('小測')||text.includes('標準')||text.includes('責任')||text.includes('判斷'))) notes.push('提醒：人類的核心價值在於設立標準與承擔最終決策。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>觀念完全正確，你已經抓到了未來工作價值的核心。')+'<br><br>現在進小測。';setTimeout(()=>goStep(3),500);}
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
     function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
   </script>

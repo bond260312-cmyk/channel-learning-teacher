@@ -13,8 +13,8 @@
   <div class="wrap">
     <section class="topbar">
       <div class="pill">Lesson 16 / Evaluation</div>
-      <h1>Lesson 16｜模型驗收怎麼做？</h1>
-      <p>前面學了怎麼訓練、怎麼寫 Prompt，這堂課我們來學驗收。怎麼判斷一個模型到底夠不夠聰明？我們該看那些華麗的 Benchmark 榜單嗎？</p>
+      <h1>Lesson 16｜模型小測怎麼做？</h1>
+      <p>前面學了怎麼訓練、怎麼寫 Prompt，這堂課我們來學小測。怎麼判斷一個模型到底夠不夠聰明？我們該看那些華麗的 Benchmark 榜單嗎？</p>
       <div class="progress">
         <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
         <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
@@ -22,15 +22,15 @@
       <div class="step-nav">
         <div class="step-chip active" data-step-chip="1">1 講解</div>
         <div class="step-chip" data-step-chip="2">2 你先說</div>
-        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="3">3 小測</div>
         <div class="step-chip" data-step-chip="4">4 複習卡</div>
       </div>
       <a class="back-link" href="./index.html">← 回課程入口</a>
     </section>
 
     <section id="step1" class="card lesson-step active">
-      <h2>Step 1｜榜單的迷思與真實的驗收</h2>
-      <div class="quote"><strong>一句話版本：</strong> 別人家的考卷（Benchmark）考 100 分，不代表它能做好你的業務。真實的 Evaluation (驗收)，是拿你的真實任務與工作流，做「盲測對比」。</div>
+      <h2>Step 1｜榜單的迷思與真實的小測</h2>
+      <div class="quote"><strong>一句話版本：</strong> 別人家的考卷（Benchmark）考 100 分，不代表它能做好你的任務。真實的 Evaluation (小測)，是拿你的真實任務與流程，做「盲測對比」。</div>
       <div class="note-box" style="margin-top:16px">
         <h3>1. 榜單污染 (Benchmark Contamination)</h3>
         <p>你一定看過那些發布會說「我們的模型在數學 MMLU 測驗打敗了 GPT-4！」。這有什麼問題？</p>
@@ -42,9 +42,9 @@
           <p>與其看冷冰冰的數字，不如像「LMSYS Chatbot Arena (聊天機器人競技場)」一樣：把兩個模型遮住名字，丟給真人去盲測投票。誰回答得比較好，誰就贏。這目前是最公認的排名方式（Elo Rating）。</p>
         </div>
         <div class="note-box">
-          <h3>3. 我們 BeeBond 的驗收法：Workflow Evaluation</h3>
+          <h3>3. 我們 這個教學系統 的小測法：Workflow Evaluation</h3>
           <p>對我們來說，模型會不會算高階微積分根本不重要。我們在乎的是：它能不能在一分鐘內把 4 軌的多機位音訊切出正確的 FCPXML 刀位？</p>
-          <p><strong>把課程的「輸入」與「預期輸出」定義清楚（Acceptance Criteria），讓 Agent 跑一遍，比對正確率，才是最鐵血的驗收。</strong></p>
+          <p><strong>把課程的「輸入」與「預期輸出」定義清楚（學習標準），讓 Agent 跑一遍，比對正確率，才是最鐵血的小測。</strong></p>
         </div>
       </div>
       <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
@@ -54,8 +54,8 @@
       <h2>Step 2｜你先說</h2>
       <p>請你回答：</p>
       <ul class="dense-list">
-        <li>如果今天有一個業務來推銷「這個新模型在某項考試成績是世界第一，你一定要買」，你會怎麼用「榜單污染」或「業務不吻合」的理由回絕他？</li>
-        <li>你會怎麼設計我們「多機位初剪課程」的驗收標準？（什麼樣的產出才叫「過了」？）</li>
+        <li>如果今天有一個任務來推銷「這個新模型在某項考試成績是世界第一，你一定要買」，你會怎麼用「榜單污染」或「任務不吻合」的理由回絕他？</li>
+        <li>你會怎麼設計我們「多機位初剪課程」的小測標準？（什麼樣的產出才叫「過了」？）</li>
       </ul>
       <textarea id="selfExplain" placeholder="代入你檢驗軟體產品時的龜毛標準。"></textarea>
       <div class="actions">
@@ -66,7 +66,7 @@
     </section>
 
     <section id="step3" class="card lesson-step">
-      <h2>Step 3｜驗收問題</h2>
+      <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3 就過關。</p>
       <div class="q" data-answer="b">
         <h3>1. 關於模型評測榜單 (Benchmark)，下列哪個敘述最符合現實狀況？</h3>
@@ -81,10 +81,10 @@
         <button class="quiz-option" data-choice="c">讓人類使用者向兩個匿名模型發問，由人類來盲測投票選出回答得比較好的一個</button>
       </div>
       <div class="q" data-answer="c">
-        <h3>3. 對於 BeeBond 團隊導入 AI 來說，最務實的驗收方法是什麼？</h3>
+        <h3>3. 對於 這個教學系統 團隊導入 AI 來說，最務實的小測方法是什麼？</h3>
         <button class="quiz-option" data-choice="a">只看原廠發表的論文成績</button>
         <button class="quiz-option" data-choice="b">讓它講個笑話看好不好笑</button>
-        <button class="quiz-option" data-choice="c">建立自己的測試集與 Checklist，用真實的業務工作流（如腳本生成或初剪程式）跑一次，檢驗產出是否符合商業標準</button>
+        <button class="quiz-option" data-choice="c">建立自己的測試集與 學習記錄，用真實的任務流程（如腳本生成或初剪程式）跑一次，檢驗產出是否符合商業標準</button>
       </div>
       <div class="actions">
         <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
@@ -102,7 +102,7 @@
         </div>
         <div class="mini">
           <h3>龐德的見解</h3>
-          <p>不要沉迷於模型跑分。我們的原則一直都是：<strong>沒有證據不算進度，沒有對接實體產出不算驗收。</strong></p>
+          <p>不要沉迷於模型跑分。我們的原則一直都是：<strong>沒有證據不算進度，沒有對接實體產出不算小測。</strong></p>
           <p>這也就是為什麼，我每次完成任務都要把檔案丟到你的桌面上讓你親自打開檢查。因為「能用」永遠比「高分」重要。</p>
         </div>
       </div>
@@ -116,7 +116,7 @@
     let currentStep = 1;
     let savedAnswer = '';
     function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
-    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('考卷')||text.includes('污染')||text.includes('背答案')||text.includes('業務'))) notes.push('提醒：背來的考題高分，不代表它能聽懂你的業務痛點。');if(!(text.includes('真實')||text.includes('工作流')||text.includes('FCPXML')||text.includes('產出'))) notes.push('提醒：我們最鐵血的驗收，就是把課程產出物親自跑一次。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>沒錯，這才是我們實戰派的驗收標準。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('考卷')||text.includes('污染')||text.includes('背答案')||text.includes('任務'))) notes.push('提醒：背來的考題高分，不代表它能聽懂你的任務痛點。');if(!(text.includes('真實')||text.includes('流程')||text.includes('FCPXML')||text.includes('產出'))) notes.push('提醒：我們最鐵血的小測，就是把課程產出物親自跑一次。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>沒錯，這才是我們實戰派的小測標準。')+'<br><br>現在進小測。';setTimeout(()=>goStep(3),500);}
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
     function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
   </script>

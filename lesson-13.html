@@ -13,8 +13,8 @@
   <div class="wrap">
     <section class="topbar">
       <div class="pill">Lesson 13 / Model vs Workflow</div>
-      <h1>Lesson 13｜模型能力 vs 工作流能力</h1>
-      <p>經過前面 12 課，我們已經摸透了 AI 的本質。這堂課要來收斂一個大哉問：如果模型（GPT-4、Claude 3.5）單體能力有極限，我們要怎麼靠 Workflow（工作流）來突破天花板？</p>
+      <h1>Lesson 13｜模型能力 vs 流程能力</h1>
+      <p>經過前面 12 課，我們已經摸透了 AI 的本質。這堂課要來收斂一個大哉問：如果模型（GPT-4、Claude 3.5）單體能力有極限，我們要怎麼靠 Workflow（流程）來突破天花板？</p>
       <div class="progress">
         <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
         <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
@@ -22,7 +22,7 @@
       <div class="step-nav">
         <div class="step-chip active" data-step-chip="1">1 講解</div>
         <div class="step-chip" data-step-chip="2">2 你先說</div>
-        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="3">3 小測</div>
         <div class="step-chip" data-step-chip="4">4 複習卡</div>
       </div>
       <a class="back-link" href="./index.html">← 回課程入口</a>
@@ -30,14 +30,14 @@
 
     <section id="step1" class="card lesson-step active">
       <h2>Step 1｜單體智力的瓶頸與系統設計的突破</h2>
-      <div class="quote"><strong>一句話版本：</strong> 一個智商 150 的天才，如果叫他閉著眼睛、一次把 10 件事想完再開口，他一定會做錯。模型能力就是那個天才，工作流就是給他睜開眼睛、分步檢查的系統。</div>
+      <div class="quote"><strong>一句話版本：</strong> 一個智商 150 的天才，如果叫他閉著眼睛、一次把 10 件事想完再開口，他一定會做錯。模型能力就是那個天才，流程就是給他睜開眼睛、分步檢查的系統。</div>
       <div class="note-box" style="margin-top:16px">
         <h3>1. 為什麼單體模型會卡關？</h3>
         <p>因為所有的語言模型本質上都是在做「一次性的前向推播（Forward Pass）」。只要任務稍微複雜，或者中間需要查證某個外部資料，模型光靠腦袋裡的「機率接龍」一定會失準或產生幻覺。</p>
       </div>
       <div class="two-col" style="margin-top:16px">
         <div class="note-box">
-          <h3>2. 工作流 (Workflow) 解決了什麼問題？</h3>
+          <h3>2. 流程 (Workflow) 解決了什麼問題？</h3>
           <p>Workflow 把一個大任務，切成了多個「模型呼叫」的節點：</p>
           <ul class="dense-list">
             <li>節點 1：先用模型 A 理解問題，產生搜尋關鍵字。</li>
@@ -48,7 +48,7 @@
         </div>
         <div class="note-box">
           <h3>3. 為什麼我們需要多 Agent 協作？</h3>
-          <p>因為讓同一個 Agent「球員兼裁判」，它很難挑出自己的毛病。透過分工設定（例如：文案 Agent 負責寫，審核 Agent 負責挑錯），我們能用 <strong>普通能力的老模型，透過優良的工作流組合，產出比頂尖新模型單體還要好的結果。</strong></p>
+          <p>因為讓同一個 Agent「球員兼裁判」，它很難挑出自己的毛病。透過分工設定（例如：文案 Agent 負責寫，審核 Agent 負責挑錯），我們能用 <strong>普通能力的老模型，透過優良的流程組合，產出比頂尖新模型單體還要好的結果。</strong></p>
         </div>
       </div>
       <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
@@ -58,8 +58,8 @@
       <h2>Step 2｜你先說</h2>
       <p>請你回答：</p>
       <ul class="dense-list">
-        <li>如果客戶質疑：「為什麼你們要用多 Agent 工作流？我直接買一個最高級的 ChatGPT 帳號讓他幫我寫不好嗎？」你會怎麼反駁他？</li>
-        <li>以我們的「多機位初剪課程」為例，哪一個環節讓你最深刻感受到「單一模型做不到，必須靠拆解工作流」？</li>
+        <li>如果學習者質疑：「為什麼你們要用多 Agent 流程？我直接買一個最高級的 ChatGPT 帳號讓他幫我寫不好嗎？」你會怎麼反駁他？</li>
+        <li>以我們的「多機位初剪課程」為例，哪一個環節讓你最深刻感受到「單一模型做不到，必須靠拆解流程」？</li>
       </ul>
       <textarea id="selfExplain" placeholder="代入你提案與課程推進時的真實經驗。"></textarea>
       <div class="actions">
@@ -70,16 +70,16 @@
     </section>
 
     <section id="step3" class="card lesson-step">
-      <h2>Step 3｜驗收問題</h2>
+      <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3 就過關。</p>
       <div class="q" data-answer="b">
         <h3>1. 面對複雜任務時，單體模型的最大致命傷是什麼？</h3>
         <button class="quiz-option" data-choice="a">它會因為運算量太大而自動關機</button>
-        <button class="quiz-option" data-choice="b">它只能進行一次性的機率接龍，無法分步驟自我查證與驗收，容易產生幻覺</button>
+        <button class="quiz-option" data-choice="b">它只能進行一次性的機率接龍，無法分步驟自我查證與小測，容易產生幻覺</button>
         <button class="quiz-option" data-choice="c">它會因為不懂中文而回答出奇怪的文字</button>
       </div>
       <div class="q" data-answer="c">
-        <h3>2. 工作流 (Workflow) 如何突破單體模型的極限？</h3>
+        <h3>2. 流程 (Workflow) 如何突破單體模型的極限？</h3>
         <button class="quiz-option" data-choice="a">透過增加提示詞的字數到十萬字</button>
         <button class="quiz-option" data-choice="b">強制模型在 1 秒內給出答案</button>
         <button class="quiz-option" data-choice="c">將任務拆解為多節點，並引入外部工具與多角色審核 (Critic)，形成反覆驗證的閉環</button>
@@ -106,8 +106,8 @@
         </div>
         <div class="mini">
           <h3>龐德的見解</h3>
-          <p>模型能力（Model Capability）決定了系統的「下限」，而工作流能力（Workflow Capability）決定了系統的「上限」。</p>
-          <p><strong>這也是 BeeBond 最核心的護城河：別人只會買最強的底座模型，而我們會為這個底座搭建最堅固的腳手架。</strong></p>
+          <p>模型能力（Model Capability）決定了系統的「下限」，而流程能力（Workflow Capability）決定了系統的「上限」。</p>
+          <p><strong>這也是 這個教學系統 最核心的護城河：別人只會買最強的底座模型，而我們會為這個底座搭建最堅固的腳手架。</strong></p>
         </div>
       </div>
       <div class="actions">
@@ -120,7 +120,7 @@
     let currentStep = 1;
     let savedAnswer = '';
     function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
-    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('極限')||text.includes('單次')||text.includes('查證')||text.includes('球員兼裁判'))) notes.push('提醒：請強調單一模型「球員兼裁判」與「無法自我查核」的弱點。');if(!(text.includes('拆解')||text.includes('流程')||text.includes('步驟')||text.includes('工具'))) notes.push('提醒：Workflow 的強大在於「拆解步驟」並引入外部工具。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>這段論述非常有力量，下次客戶再問，就把這段話丟給他。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('極限')||text.includes('單次')||text.includes('查證')||text.includes('球員兼裁判'))) notes.push('提醒：請強調單一模型「球員兼裁判」與「無法自我查核」的弱點。');if(!(text.includes('拆解')||text.includes('流程')||text.includes('步驟')||text.includes('工具'))) notes.push('提醒：Workflow 的強大在於「拆解步驟」並引入外部工具。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>這段論述非常有力量，下次學習者再問，就把這段話丟給他。')+'<br><br>現在進小測。';setTimeout(()=>goStep(3),500);}
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
     function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
   </script>

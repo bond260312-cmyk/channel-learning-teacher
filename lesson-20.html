@@ -22,7 +22,7 @@
       <div class="step-nav">
         <div class="step-chip active" data-step-chip="1">1 講解</div>
         <div class="step-chip" data-step-chip="2">2 你先說</div>
-        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="3">3 小測</div>
         <div class="step-chip" data-step-chip="4">4 複習卡</div>
       </div>
       <a class="back-link" href="./index.html">← 回課程入口</a>
@@ -49,7 +49,7 @@
         <div class="note-box">
           <h3>3. CEO 的結語</h3>
           <p>這 20 堂課，我們拆解了李宏毅老師的 2025 導論與 Agent 架構。我們知道了模型是文字接龍、微調不能背書、榜單會騙人、Workflow 才是王道。</p>
-          <p>這一切知識，都是為了讓你在面對客戶的質疑時，能夠自信地說出：<strong>「我們不賣玄學，我們賣的是對 AI 極限的精準控制。」</strong></p>
+          <p>這一切知識，都是為了讓你在面對學習者的質疑時，能夠自信地說出：<strong>「我們不賣玄學，我們賣的是對 AI 極限的精準控制。」</strong></p>
         </div>
       </div>
       <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
@@ -59,9 +59,9 @@
       <h2>Step 2｜你先說</h2>
       <p>請你回答：</p>
       <ul class="dense-list">
-        <li>回顧這 20 堂課的旅程，哪一個概念（例如：Agent Workflow、RAG、文字接龍、榜單污染）讓你覺得「在接下來的 BeeBond 提案中最實用」？為什麼？</li>
+        <li>回顧這 20 堂課的旅程，哪一個概念（例如：Agent Workflow、RAG、文字接龍、榜單污染）讓你覺得「在接下來的 這個教學系統 提案中最實用」？為什麼？</li>
       </ul>
-      <textarea id="selfExplain" placeholder="寫下你的心得，這將是你的課程結案報告。"></textarea>
+      <textarea id="selfExplain" placeholder="寫下你的心得，這將是你的課程學習總結。"></textarea>
       <div class="actions">
         <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
         <button class="btn secondary" onclick="goStep(1)">回上一步</button>
@@ -70,7 +70,7 @@
     </section>
 
     <section id="step3" class="card lesson-step">
-      <h2>Step 3｜驗收問題</h2>
+      <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3 就過關。</p>
       <div class="q" data-answer="b">
         <h3>1. 為什麼影像生成模型常在「手指數量」等物理結構上犯錯？</h3>
@@ -107,7 +107,7 @@
         <div class="mini">
           <h3>龐德的見解</h3>
           <p>恭喜，奇哥。我們完成了整個《生成式人工智慧與機器學習導論 2025》與 Agent 架構的轉譯。這 20 堂課的內容，已經足夠你在亞洲市場打下堅實的技術論述基礎。</p>
-          <p><strong>戰隊的第一階段知識軍備已完成。接下來，我們拿這套武器，去打下 VIYANG 與武哥課程的勝利。</strong></p>
+          <p><strong>戰隊的第一階段知識軍備已完成。接下來，我們拿這套能力，去打下 VIYANG 與武哥課程的勝利。</strong></p>
         </div>
       </div>
       <div class="actions">
@@ -120,7 +120,7 @@
     let currentStep = 1;
     let savedAnswer = '';
     function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
-    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='這不只是個測驗，這是結案報告。寫下你最深刻的體會。';return;}savedAnswer=text;box.className='feedback ok';box.style.display='block';box.innerHTML='收到你的反饋。這 20 課的知識已經真正變成你的武器了。<br><br>現在進最後一關的驗收。';setTimeout(()=>goStep(3),500);}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='這不只是個測驗，這是學習總結。寫下你最深刻的體會。';return;}savedAnswer=text;box.className='feedback ok';box.style.display='block';box.innerHTML='收到你的反饋。這 20 課的知識已經真正變成你的能力了。<br><br>現在進最後一關的小測。';setTimeout(()=>goStep(3),500);}
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
     function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，全數過關！';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
   </script>

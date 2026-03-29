@@ -14,7 +14,7 @@
     <section class="topbar">
       <div class="pill">Lesson 11 / GenAI 2025 Lecture 2</div>
       <h1>Lesson 11｜第 2 講上下文工程（Context Engineering）</h1>
-      <p>這是這門課的靈魂之一。我們已經知道「工作流」與「Context Engineering」密不可分（Lesson 2），現在從李宏毅老師的角度看：為什麼上下文比你想的更重要？</p>
+      <p>這是這門課的靈魂之一。我們已經知道「流程」與「Context Engineering」密不可分（Lesson 2），現在從李宏毅老師的角度看：為什麼上下文比你想的更重要？</p>
       <div class="progress">
         <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
         <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
@@ -22,7 +22,7 @@
       <div class="step-nav">
         <div class="step-chip active" data-step-chip="1">1 講解</div>
         <div class="step-chip" data-step-chip="2">2 你先說</div>
-        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="3">3 小測</div>
         <div class="step-chip" data-step-chip="4">4 複習卡</div>
       </div>
       <a class="back-link" href="./index.html">← 回課程入口</a>
@@ -33,10 +33,10 @@
       <div class="quote"><strong>一句話版本：</strong> 模型不需要重新「訓練 (Training)」才能學會新任務，它只要在「上下文 (Context)」中看過規則與範例，就能當場學會。</div>
       <div class="note-box" style="margin-top:16px">
         <h3>1. 臨時抱佛腳的神技</h3>
-        <p>In-Context Learning 就像是帶小抄進考場。就算這個知識模型在預訓練時沒背過（例如 BeeBond 的課程製作術語），只要你在 Prompt 裡把定義貼給它看，它立刻就能看懂並應用。</p>
+        <p>In-Context Learning 就像是帶小抄進考場。就算這個知識模型在預訓練時沒背過（例如 這個教學系統 的內容整理術語），只要你在 Prompt 裡把定義貼給它看，它立刻就能看懂並應用。</p>
         <ul class="dense-list">
           <li><strong>限制：</strong> 這個知識是暫時的（Short-term memory）。只要對話窗一關、Context 被清空，它就又忘記了。</li>
-          <li><strong>解法：</strong> 這就是為什麼我們的 OpenClaw 系統要配備 <code>MEMORY.md</code> 和 Checklist（長短期實體記憶），每次開啟對話前先把這些「背景知識」塞進 Context。</li>
+          <li><strong>解法：</strong> 這就是為什麼我們的 AI 學習系統要配備 <code>MEMORY.md</code> 和 學習記錄（不同層級的學習記錄），每次開啟對話前先把這些「背景知識」塞進 Context。</li>
         </ul>
       </div>
       <div class="two-col" style="margin-top:16px">
@@ -61,10 +61,10 @@
       <h2>Step 2｜你先說</h2>
       <p>請你回答：</p>
       <ul class="dense-list">
-        <li>如果今天 BeeBond 接到一個「非常冷門、網路上根本查不到的傳統產業」客戶，你會怎麼利用 In-Context Learning 或 RAG 的概念，讓龐德變成這個產業的專家？</li>
-        <li>為什麼我們不能把客戶厚達 500 頁的型錄「全部」一次丟給龐德，要他直接寫貼文？</li>
+        <li>如果今天 這個教學系統 接到一個「非常冷門、網路上根本查不到的傳統產業」學習者，你會怎麼利用 In-Context Learning 或 RAG 的概念，讓龐德變成這個產業的專家？</li>
+        <li>為什麼我們不能把學習者厚達 500 頁的型錄「全部」一次丟給龐德，要他直接寫貼文？</li>
       </ul>
-      <textarea id="selfExplain" placeholder="代入你規劃客戶課程時的思考。"></textarea>
+      <textarea id="selfExplain" placeholder="代入你規劃學習者課程時的思考。"></textarea>
       <div class="actions">
         <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
         <button class="btn secondary" onclick="goStep(1)">回上一步</button>
@@ -73,7 +73,7 @@
     </section>
 
     <section id="step3" class="card lesson-step">
-      <h2>Step 3｜驗收問題</h2>
+      <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3 就過關。</p>
       <div class="q" data-answer="b">
         <h3>1. 什麼是 In-Context Learning (上下文學習)？</h3>
@@ -123,7 +123,7 @@
     let currentStep = 1;
     let savedAnswer = '';
     function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
-    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('檢索')||text.includes('RAG')||text.includes('知識庫')||text.includes('資料庫'))) notes.push('提醒：對於冷門產業，必須建立專屬知識庫，並透過 RAG 檢索關鍵內容餵給模型。');if(!(text.includes('遺忘')||text.includes('Lost')||text.includes('重點')||text.includes('摘要'))) notes.push('提醒：超長文本容易導致模型遺忘或找不到重點，精準餵食才是王道。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>非常精準。掌握了 RAG 與 Context 的限制，你的系統規劃能力就升級了。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('檢索')||text.includes('RAG')||text.includes('知識庫')||text.includes('資料庫'))) notes.push('提醒：對於冷門產業，必須建立專屬知識庫，並透過 RAG 檢索關鍵內容餵給模型。');if(!(text.includes('遺忘')||text.includes('Lost')||text.includes('重點')||text.includes('摘要'))) notes.push('提醒：超長文本容易導致模型遺忘或找不到重點，精準餵食才是王道。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>非常精準。掌握了 RAG 與 Context 的限制，你的系統規劃能力就升級了。')+'<br><br>現在進小測。';setTimeout(()=>goStep(3),500);}
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
     function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
   </script>

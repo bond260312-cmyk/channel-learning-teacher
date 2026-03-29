@@ -22,7 +22,7 @@
       <div class="step-nav">
         <div class="step-chip active" data-step-chip="1">1 講解</div>
         <div class="step-chip" data-step-chip="2">2 你先說</div>
-        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="3">3 小測</div>
         <div class="step-chip" data-step-chip="4">4 複習卡</div>
       </div>
       <a class="back-link" href="./index.html">← 回課程入口</a>
@@ -61,8 +61,8 @@
       <h2>Step 2｜你先說</h2>
       <p>請你回答：</p>
       <ul class="dense-list">
-        <li>如果客戶問你：「為什麼 AI 生成的腳本有時候文筆很好，但資料年份卻是錯的？」你會怎麼用「文字接龍」的概念向他解釋？</li>
-        <li>你會怎麼說明，我們 BeeBond 幫客戶導入的不是「單純的 ChatGPT」，而是一套具備驗證能力的系統？</li>
+        <li>如果學習者問你：「為什麼 AI 生成的腳本有時候文筆很好，但資料年份卻是錯的？」你會怎麼用「文字接龍」的概念向他解釋？</li>
+        <li>你會怎麼說明，我們 這個教學系統 幫學習者導入的不是「單純的 ChatGPT」，而是一套具備驗證能力的系統？</li>
       </ul>
       <textarea id="selfExplain" placeholder="代入你對外提案時的真實對話情境。"></textarea>
       <div class="actions">
@@ -73,11 +73,11 @@
     </section>
 
     <section id="step3" class="card lesson-step">
-      <h2>Step 3｜驗收問題</h2>
+      <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3 就過關。</p>
       <div class="q" data-answer="b">
         <h3>1. 生成式語言模型的底層運作邏輯，最精確的描述是什麼？</h3>
-        <button class="quiz-option" data-choice="a">它課程製作建置了一個極為精準的維基百科資料庫</button>
+        <button class="quiz-option" data-choice="a">它內容整理建置了一個極為精準的維基百科資料庫</button>
         <button class="quiz-option" data-choice="b">它只是根據訓練語料，預測上文之後機率最高的下一個 Token（文字接龍）</button>
         <button class="quiz-option" data-choice="c">它擁有人類般的自我反省與推理意識</button>
       </div>
@@ -123,7 +123,7 @@
     let currentStep = 1;
     let savedAnswer = '';
     function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
-    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('接龍')||text.includes('機率')||text.includes('通順')||text.includes('幻覺'))) notes.push('提醒：請善用「機率與文字接龍」來解釋模型幻覺的本質。');if(!(text.includes('工具')||text.includes('爬蟲')||text.includes('驗證')||text.includes('事實'))) notes.push('提醒：我們要強調 BeeBond 的系統配備了外部查核工具與驗證流程。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>這就是我們對客戶的標準論述，精準到位。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('接龍')||text.includes('機率')||text.includes('通順')||text.includes('幻覺'))) notes.push('提醒：請善用「機率與文字接龍」來解釋模型幻覺的本質。');if(!(text.includes('工具')||text.includes('爬蟲')||text.includes('驗證')||text.includes('事實'))) notes.push('提醒：我們要強調 這個教學系統 的系統配備了外部查核工具與驗證流程。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>這就是我們對學習者的標準論述，精準到位。')+'<br><br>現在進小測。';setTimeout(()=>goStep(3),500);}
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
     function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
   </script>

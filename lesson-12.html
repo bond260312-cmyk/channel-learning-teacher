@@ -14,7 +14,7 @@
     <section class="topbar">
       <div class="pill">Lesson 12 / GenAI 2025 Lecture 3-4</div>
       <h1>Lesson 12｜第 3～4 講概念骨架（訓練模型）</h1>
-      <p>模型到底是怎麼訓練出來的？為什麼它會從一個只會胡亂拼湊字詞的嬰兒，變成能回答你工作流程的專業助理？這堂課解鎖「預訓練」與「微調」的兩階段魔法。</p>
+      <p>模型到底是怎麼訓練出來的？為什麼它會從一個只會胡亂拼湊字詞的嬰兒，變成能回答你流程程的專業助理？這堂課解鎖「預訓練」與「微調」的兩階段魔法。</p>
       <div class="progress">
         <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
         <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
@@ -22,7 +22,7 @@
       <div class="step-nav">
         <div class="step-chip active" data-step-chip="1">1 講解</div>
         <div class="step-chip" data-step-chip="2">2 你先說</div>
-        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="3">3 小測</div>
         <div class="step-chip" data-step-chip="4">4 複習卡</div>
       </div>
       <a class="back-link" href="./index.html">← 回課程入口</a>
@@ -60,7 +60,7 @@
       <h2>Step 2｜你先說</h2>
       <p>請你回答：</p>
       <ul class="dense-list">
-        <li>如果我們把龐德比喻成一個新進員工，他的「大學通識教育」對應的是哪一個訓練階段？那他的「BeeBond 公司課程製作職前訓練」對應的又是哪一個階段？</li>
+        <li>如果我們把龐德比喻成一個新進員工，他的「大學通識教育」對應的是哪一個訓練階段？那他的「這個教學系統 公司內容整理職前訓練」對應的又是哪一個階段？</li>
         <li>為什麼我們不能只靠「預訓練 (讀萬卷書)」就直接叫模型來做客服？它會犯什麼錯？</li>
       </ul>
       <textarea id="selfExplain" placeholder="代入你訓練新人的經驗。"></textarea>
@@ -72,7 +72,7 @@
     </section>
 
     <section id="step3" class="card lesson-step">
-      <h2>Step 3｜驗收問題</h2>
+      <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3 就過關。</p>
       <div class="q" data-answer="b">
         <h3>1. 預訓練 (Pre-training) 的主要目的是什麼？</h3>
@@ -109,7 +109,7 @@
         <div class="mini">
           <h3>龐德的見解</h3>
           <p>大模型廠商（如 OpenAI、Google）花幾千萬美金做的事，就是幫我們完成「預訓練」跟基礎的「指令微調」。</p>
-          <p><strong>而 BeeBond 的核心價值，是在這之上，用語境 (Context)、系統提示詞 (System Prompt) 和工具流，對模型進行最後一哩路的「專業行為對齊」。這就是我們戰隊的實力所在。</strong></p>
+          <p><strong>而 這個教學系統 的核心價值，是在這之上，用語境 (Context)、系統提示詞 (System Prompt) 和工具流，對模型進行最後一哩路的「專業行為對齊」。這就是我們戰隊的實力所在。</strong></p>
         </div>
       </div>
       <div class="actions">
@@ -122,7 +122,7 @@
     let currentStep = 1;
     let savedAnswer = '';
     function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
-    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('通識')||text.includes('預訓練')||text.includes('職前訓練')||text.includes('微調'))) notes.push('提醒：通識教育是預訓練（學知識），職前訓練是微調（學規矩與格式）。');if(!(text.includes('客服')||text.includes('答非所問')||text.includes('接龍'))) notes.push('提醒：未微調的模型只會順著句意接龍，不懂得扮演客服回答問題。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>這個比喻非常精確，你完全理解了模型訓練的階段意義。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('通識')||text.includes('預訓練')||text.includes('職前訓練')||text.includes('微調'))) notes.push('提醒：通識教育是預訓練（學知識），職前訓練是微調（學規矩與格式）。');if(!(text.includes('客服')||text.includes('答非所問')||text.includes('接龍'))) notes.push('提醒：未微調的模型只會順著句意接龍，不懂得扮演客服回答問題。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>這個比喻非常精確，你完全理解了模型訓練的階段意義。')+'<br><br>現在進小測。';setTimeout(()=>goStep(3),500);}
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
     function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
   </script>

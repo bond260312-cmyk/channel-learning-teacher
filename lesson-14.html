@@ -14,7 +14,7 @@
     <section class="topbar">
       <div class="pill">Lesson 14 / Fine-Tuning</div>
       <h1>Lesson 14｜Fine-tuning 是在做什麼？</h1>
-      <p>客戶常說：「能不能把我們的資料倒給 AI，讓它『訓練』成我們的專屬模型？」這堂課我們來拆解這個迷思：Fine-tuning (微調) 到底是在學知識，還是在學語氣？</p>
+      <p>學習者常說：「能不能把我們的資料倒給 AI，讓它『訓練』成我們的專屬模型？」這堂課我們來拆解這個迷思：Fine-tuning (微調) 到底是在學知識，還是在學語氣？</p>
       <div class="progress">
         <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
         <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
@@ -22,7 +22,7 @@
       <div class="step-nav">
         <div class="step-chip active" data-step-chip="1">1 講解</div>
         <div class="step-chip" data-step-chip="2">2 你先說</div>
-        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="3">3 小測</div>
         <div class="step-chip" data-step-chip="4">4 複習卡</div>
       </div>
       <a class="back-link" href="./index.html">← 回課程入口</a>
@@ -62,9 +62,9 @@
       <h2>Step 2｜你先說</h2>
       <p>請你回答：</p>
       <ul class="dense-list">
-        <li>如果客戶有一份最新的「2026 員工請假規定」PDF，希望 AI 能根據這份文件回答員工問題。你會建議他做 Fine-tuning 還是 RAG？為什麼？</li>
+        <li>如果學習者有一份最新的「2026 員工請假規定」PDF，希望 AI 能根據這份文件回答員工問題。你會建議他做 Fine-tuning 還是 RAG？為什麼？</li>
       </ul>
-      <textarea id="selfExplain" placeholder="代入你對客戶提案時的建議與理由。"></textarea>
+      <textarea id="selfExplain" placeholder="代入你對學習者提案時的建議與理由。"></textarea>
       <div class="actions">
         <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
         <button class="btn secondary" onclick="goStep(1)">回上一步</button>
@@ -73,7 +73,7 @@
     </section>
 
     <section id="step3" class="card lesson-step">
-      <h2>Step 3｜驗收問題</h2>
+      <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3 就過關。</p>
       <div class="q" data-answer="b">
         <h3>1. Fine-tuning (微調) 最適合解決哪種問題？</h3>
@@ -123,7 +123,7 @@
     let currentStep = 1;
     let savedAnswer = '';
     function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
-    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('RAG')||text.includes('檢索')||text.includes('上下文'))) notes.push('提醒：對於即時變動的規定文件，必須使用 RAG。');if(!(text.includes('幻覺')||text.includes('背知識')||text.includes('語氣'))) notes.push('提醒：微調用來背知識容易產生幻覺，微調是拿來定語氣的。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>完全正確，RAG 才是處理知識庫的正解。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('RAG')||text.includes('檢索')||text.includes('上下文'))) notes.push('提醒：對於即時變動的規定文件，必須使用 RAG。');if(!(text.includes('幻覺')||text.includes('背知識')||text.includes('語氣'))) notes.push('提醒：微調用來背知識容易產生幻覺，微調是拿來定語氣的。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>完全正確，RAG 才是處理知識庫的正解。')+'<br><br>現在進小測。';setTimeout(()=>goStep(3),500);}
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
     function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
   </script>

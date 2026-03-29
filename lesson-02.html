@@ -13,8 +13,8 @@
   <div class="wrap">
     <section class="topbar">
       <div class="pill">Lesson 2 / Context Engineering × Workflow</div>
-      <h1>Lesson 2｜上下文工程與工作流的關係</h1>
-      <p>這一課要把一個關鍵誤區拆掉：<strong>context engineering 不是 prompt 小技巧，而是整個工作流怎麼切、怎麼接、怎麼回填資訊的設計能力。</strong></p>
+      <h1>Lesson 2｜上下文工程與流程的關係</h1>
+      <p>這一課要把一個關鍵誤區拆掉：<strong>context engineering 不是 prompt 小技巧，而是整個流程怎麼切、怎麼接、怎麼回填資訊的設計能力。</strong></p>
       <div class="progress">
         <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
         <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
@@ -22,11 +22,11 @@
       <div class="step-nav">
         <div class="step-chip active" data-step-chip="1">1 講解</div>
         <div class="step-chip" data-step-chip="2">2 你先說</div>
-        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="3">3 小測</div>
         <div class="step-chip" data-step-chip="4">4 複習卡</div>
       </div>
       <a class="back-link" href="./index.html">← 回課程入口</a>
-      <a class="back-link" style="margin-left:12px" href="../../index.html">← 回總入口</a>
+      <a class="back-link" style="margin-left:12px" href="./index.html">← 回首頁</a>
     </section>
 
     <section id="step1" class="card lesson-step active">
@@ -88,7 +88,7 @@
         <li>為什麼說 context engineering 不是只有 prompt？</li>
         <li>請你用一個自己的工作場景，比喻兩者怎麼配合。</li>
       </ul>
-      <textarea id="selfExplain" placeholder="先講你的版本。用工作、企劃、業務、影片流程來比喻都可以。"></textarea>
+      <textarea id="selfExplain" placeholder="先講你的版本。用工作、企劃、任務、影片流程來比喻都可以。"></textarea>
       <div class="actions">
         <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
         <button class="btn secondary" onclick="goStep(1)">回上一步</button>
@@ -97,7 +97,7 @@
     </section>
 
     <section id="step3" class="card lesson-step">
-      <h2>Step 3｜驗收問題</h2>
+      <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3，就代表你抓到主幹。</p>
       <div class="q" data-answer="c">
         <h3>1. 哪一句最能描述 workflow 與 context engineering 的關係？</h3>
@@ -171,7 +171,7 @@
       if(!(text.includes('資訊')||text.includes('上下文')||text.includes('交接'))) notes.push('補一句：context engineering 管的是每一步到底拿到哪些資訊。');
       if(!(text.includes('prompt')||text.includes('不是只有'))) notes.push('再補一句：它不是只有 prompt，而是多步驟中的資訊配置。');
       box.className='feedback ok'; box.style.display='block';
-      box.innerHTML='收到，你的版本已保留。' + (notes.length?'<br><br>'+notes.join('<br>'):'<br><br>方向正確，你已經把骨架抓到了。') + '<br><br>進驗收。';
+      box.innerHTML='收到，你的版本已保留。' + (notes.length?'<br><br>'+notes.join('<br>'):'<br><br>方向正確，你已經把骨架抓到了。') + '<br><br>進小測。';
       setTimeout(()=>goStep(3),500);
     }
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});

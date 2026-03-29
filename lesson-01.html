@@ -22,10 +22,10 @@
       <div class="step-nav">
         <div class="step-chip active" data-step-chip="1">1 講解</div>
         <div class="step-chip" data-step-chip="2">2 你先說</div>
-        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="3">3 小測</div>
         <div class="step-chip" data-step-chip="4">4 複習卡</div>
       </div>
-      <a class="back-link" href="../../index.html">← 回總入口</a>
+      <a class="back-link" href="./index.html">← 回首頁</a>
     </section>
 
     <section id="step1" class="card lesson-step active">
@@ -84,7 +84,7 @@
     </section>
 
     <section id="step3" class="card lesson-step">
-      <h2>Step 3｜驗收問題</h2>
+      <h2>Step 3｜小測問題</h2>
       <p>答對 2 / 3，代表你已經過基本理解門檻。</p>
       <div class="q" data-answer="b">
         <h3>1. 為什麼模型不能只拿到最新工具輸出就繼續做事？</h3>
@@ -158,7 +158,7 @@
       if(!(text.includes('整理')||text.includes('篩')||text.includes('briefing'))) notes.push('補一句：核心不是堆資料，而是整理後再送進模型。');
       if(!(text.includes('有限')||text.includes('全部')||text.includes('記憶'))) notes.push('再補一句：因為模型上下文有限，所以不能把所有歷史都塞回去。');
       box.className='feedback ok'; box.style.display='block';
-      box.innerHTML='收到，你的觀點已經保留下來。' + (notes.length?'<br><br>'+notes.join('<br>'):'<br><br>你的方向已經抓到重點。') + '<br><br>現在進驗收。';
+      box.innerHTML='收到，你的觀點已經保留下來。' + (notes.length?'<br><br>'+notes.join('<br>'):'<br><br>你的方向已經抓到重點。') + '<br><br>現在進小測。';
       setTimeout(()=>goStep(3),500);
     }
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
