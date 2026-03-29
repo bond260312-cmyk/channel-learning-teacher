@@ -3,56 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>奇哥 AI 學習站｜桌面同步需求清單</title>
-  <style>:root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--soft:#eef4ff}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:980px;margin:0 auto;padding:24px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 8px 24px rgba(23,35,58,.05)}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--soft);color:var(--primary);font-size:12px;font-weight:700}.btn{display:inline-block;text-decoration:none;background:var(--primary);color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;margin-right:10px}.note{padding:14px 16px;border-radius:14px;background:#fafbfe;border:1px solid var(--line)}</style>
+  <title>頁面已下架</title>
+  <style>
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f7f8fc;color:#17233a;line-height:1.7}
+    .wrap{max-width:760px;margin:0 auto;padding:32px}
+    .card{background:#fff;border:1px solid #e6eaf2;border-radius:18px;padding:24px;box-shadow:0 8px 24px rgba(23,35,58,.05)}
+    h1{margin-top:0} p{color:#5d6b82}.btn{display:inline-block;text-decoration:none;background:#1865f2;color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;margin-right:10px}
+  </style>
 </head>
 <body>
   <div class="wrap">
     <section class="card">
-      <div class="pill">桌面同步需求 / v1</div>
-      <h1>桌面同步需求清單</h1>
-      <p>這頁不是工程實作，而是把桌面版要同步什麼先講清楚，避免後面越做越亂。</p>
-      <a class="btn" href="./index.html">回課程入口</a>
+      <h1>此頁面目前不對外公開</h1>
+      <p>你可以回到學習站首頁或課程總綱，繼續瀏覽公開內容。</p>
+      <a class="btn" href="./index.html">回學習站首頁</a>
       <a class="btn" href="./course-outline.html">回課程總綱</a>
-    </section>
-
-    <section class="card">
-      <h2>第一版一定要同步的 6 件事</h2>
-      <ol>
-        <li><strong>目前看到哪一課：</strong> last opened lesson。</li>
-        <li><strong>每課完成狀態：</strong> 未開始 / 進行中 / 已完成。</li>
-        <li><strong>Lesson 1 的自述內容：</strong> 你先說與複習卡內容。</li>
-        <li><strong>測驗結果：</strong> 最近一次得分、是否過門檻。</li>
-        <li><strong>課程版本：</strong> 避免舊快取蓋掉新內容。</li>
-        <li><strong>本機時間戳：</strong> 判斷最後更新來源。</li>
-      </ol>
-    </section>
-
-    <section class="card">
-      <h2>建議同步欄位</h2>
-      <div class="note">
-<pre style="margin:0;white-space:pre-wrap;color:#17233a">courseId
-lessonId
-status
-lastOpenedAt
-quizScore
-quizPassed
-selfExplain
-reviewCard
-contentVersion
-updatedAt
-syncSource (desktop / local)</pre>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>同步策略建議</h2>
-      <ul>
-        <li>第一版先用 <strong>localStorage / JSON 檔</strong>，別一開始就上後端大工程。</li>
-        <li>寫入時採 <strong>整課覆蓋</strong>，不要拆太細，減少同步錯誤。</li>
-        <li>若版本衝突，先顯示「本機較新 / 遠端較新」，不要默默覆蓋。</li>
-        <li>先完成單機桌面同步，再談多裝置帳號同步。</li>
-      </ul>
     </section>
   </div>
 </body>

@@ -14,7 +14,7 @@
     <section class="topbar">
       <div class="pill">Lesson 18 / Speech Model</div>
       <h1>Lesson 18｜語音語言模型骨架</h1>
-      <p>前面我們一直談「文字接龍」，但如果丟給 AI 的是一段錄音檔呢？這堂課解鎖 AI 是怎麼「聽懂」語音的，這跟我們在實境秀專案裡用的 Whisper 息息相關。</p>
+      <p>前面我們一直談「文字接龍」，但如果丟給 AI 的是一段錄音檔呢？這堂課解鎖 AI 是怎麼「聽懂」語音的，這跟我們在實境秀課程裡用的 Whisper 息息相關。</p>
       <div class="progress">
         <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
         <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
@@ -33,7 +33,7 @@
       <div class="quote"><strong>一句話版本：</strong> 電腦聽不懂聲音，它只看得懂數字。語音模型就是把長長的音波，切成一小塊一小塊的數字矩陣（Token），然後去預測這些數字塊對應的文字或下一個數字塊。</div>
       <div class="note-box" style="margin-top:16px">
         <h3>1. 過去的做法：先轉文字再處理 (Cascade Model)</h3>
-        <p>早期我們做語音辨識，是先用一套系統（如 ASR）把語音硬轉成逐字稿，再把逐字稿丟給 ChatGPT 去分析。這就是你在武哥多機位專案裡目前用的手法（WhisperX 轉 XML）。</p>
+        <p>早期我們做語音辨識，是先用一套系統（如 ASR）把語音硬轉成逐字稿，再把逐字稿丟給 ChatGPT 去分析。這就是你在武哥多機位課程裡目前用的手法（WhisperX 轉 XML）。</p>
         <p><strong>缺點：</strong> 語氣、笑聲、停頓、情緒，在「轉成文字」的那一刻，全部被抹殺掉了。文字只剩下乾癟的內容。</p>
       </div>
       <div class="two-col" style="margin-top:16px">
@@ -80,7 +80,7 @@
         <button class="quiz-option" data-choice="c">不經過逐字稿，直接將音波特徵轉換為向量，與語言模型混合運算，保留了情緒與重疊音</button>
       </div>
       <div class="q" data-answer="a">
-        <h3>3. 在 BeeBond 的多機位初剪專案中，為什麼我們選擇 WhisperX 而不是直接用端到端大模型？</h3>
+        <h3>3. 在 BeeBond 的多機位初剪課程中，為什麼我們選擇 WhisperX 而不是直接用端到端大模型？</h3>
         <button class="quiz-option" data-choice="a">因為剪輯刀位需要絕對精準的時間戳 (Timecode)，而 Whisper 架構在抓取時間錨點上比黑盒大模型更具工程穩定性</button>
         <button class="quiz-option" data-choice="b">因為 WhisperX 是最便宜的選擇</button>
         <button class="quiz-option" data-choice="c">因為大模型不懂中文</button>

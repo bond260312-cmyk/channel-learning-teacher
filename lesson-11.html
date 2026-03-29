@@ -33,7 +33,7 @@
       <div class="quote"><strong>一句話版本：</strong> 模型不需要重新「訓練 (Training)」才能學會新任務，它只要在「上下文 (Context)」中看過規則與範例，就能當場學會。</div>
       <div class="note-box" style="margin-top:16px">
         <h3>1. 臨時抱佛腳的神技</h3>
-        <p>In-Context Learning 就像是帶小抄進考場。就算這個知識模型在預訓練時沒背過（例如 BeeBond 的內部術語），只要你在 Prompt 裡把定義貼給它看，它立刻就能看懂並應用。</p>
+        <p>In-Context Learning 就像是帶小抄進考場。就算這個知識模型在預訓練時沒背過（例如 BeeBond 的課程製作術語），只要你在 Prompt 裡把定義貼給它看，它立刻就能看懂並應用。</p>
         <ul class="dense-list">
           <li><strong>限制：</strong> 這個知識是暫時的（Short-term memory）。只要對話窗一關、Context 被清空，它就又忘記了。</li>
           <li><strong>解法：</strong> 這就是為什麼我們的 OpenClaw 系統要配備 <code>MEMORY.md</code> 和 Checklist（長短期實體記憶），每次開啟對話前先把這些「背景知識」塞進 Context。</li>
@@ -64,7 +64,7 @@
         <li>如果今天 BeeBond 接到一個「非常冷門、網路上根本查不到的傳統產業」客戶，你會怎麼利用 In-Context Learning 或 RAG 的概念，讓龐德變成這個產業的專家？</li>
         <li>為什麼我們不能把客戶厚達 500 頁的型錄「全部」一次丟給龐德，要他直接寫貼文？</li>
       </ul>
-      <textarea id="selfExplain" placeholder="代入你規劃客戶專案時的思考。"></textarea>
+      <textarea id="selfExplain" placeholder="代入你規劃客戶課程時的思考。"></textarea>
       <div class="actions">
         <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
         <button class="btn secondary" onclick="goStep(1)">回上一步</button>

@@ -44,7 +44,7 @@
         <div class="note-box">
           <h3>3. 我們 BeeBond 的驗收法：Workflow Evaluation</h3>
           <p>對我們來說，模型會不會算高階微積分根本不重要。我們在乎的是：它能不能在一分鐘內把 4 軌的多機位音訊切出正確的 FCPXML 刀位？</p>
-          <p><strong>把專案的「輸入」與「預期輸出」定義清楚（Acceptance Criteria），讓 Agent 跑一遍，比對正確率，才是最鐵血的驗收。</strong></p>
+          <p><strong>把課程的「輸入」與「預期輸出」定義清楚（Acceptance Criteria），讓 Agent 跑一遍，比對正確率，才是最鐵血的驗收。</strong></p>
         </div>
       </div>
       <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
@@ -55,7 +55,7 @@
       <p>請你回答：</p>
       <ul class="dense-list">
         <li>如果今天有一個業務來推銷「這個新模型在某項考試成績是世界第一，你一定要買」，你會怎麼用「榜單污染」或「業務不吻合」的理由回絕他？</li>
-        <li>你會怎麼設計我們「多機位初剪專案」的驗收標準？（什麼樣的產出才叫「過了」？）</li>
+        <li>你會怎麼設計我們「多機位初剪課程」的驗收標準？（什麼樣的產出才叫「過了」？）</li>
       </ul>
       <textarea id="selfExplain" placeholder="代入你檢驗軟體產品時的龜毛標準。"></textarea>
       <div class="actions">
@@ -116,7 +116,7 @@
     let currentStep = 1;
     let savedAnswer = '';
     function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
-    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('考卷')||text.includes('污染')||text.includes('背答案')||text.includes('業務'))) notes.push('提醒：背來的考題高分，不代表它能聽懂你的業務痛點。');if(!(text.includes('真實')||text.includes('工作流')||text.includes('FCPXML')||text.includes('產出'))) notes.push('提醒：我們最鐵血的驗收，就是把專案產出物親自跑一次。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>沒錯，這才是我們實戰派的驗收標準。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('考卷')||text.includes('污染')||text.includes('背答案')||text.includes('業務'))) notes.push('提醒：背來的考題高分，不代表它能聽懂你的業務痛點。');if(!(text.includes('真實')||text.includes('工作流')||text.includes('FCPXML')||text.includes('產出'))) notes.push('提醒：我們最鐵血的驗收，就是把課程產出物親自跑一次。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>沒錯，這才是我們實戰派的驗收標準。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
     document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
     function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
   </script>
