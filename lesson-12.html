@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奇哥 AI 學習站｜Lesson 12</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="topbar">
+      <div class="pill">Lesson 12 / GenAI 2025 Lecture 3-4</div>
+      <h1>Lesson 12｜第 3～4 講概念骨架（訓練模型）</h1>
+      <p>模型到底是怎麼訓練出來的？為什麼它會從一個只會胡亂拼湊字詞的嬰兒，變成能回答你工作流程的專業助理？這堂課解鎖「預訓練」與「微調」的兩階段魔法。</p>
+      <div class="progress">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
+      </div>
+      <div class="step-nav">
+        <div class="step-chip active" data-step-chip="1">1 講解</div>
+        <div class="step-chip" data-step-chip="2">2 你先說</div>
+        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="4">4 複習卡</div>
+      </div>
+      <a class="back-link" href="./index.html">← 回課程入口</a>
+    </section>
+
+    <section id="step1" class="card lesson-step active">
+      <h2>Step 1｜預訓練與微調的兩段式成長</h2>
+      <div class="quote"><strong>一句話版本：</strong> Pre-training (預訓練) 是讓模型讀萬卷書，學會人類語言的邏輯；Instruction Fine-Tuning (指令微調) 是教它規矩，讓它學會像個助理一樣回答問題，而不是自言自語。</div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>1. 階段一：預訓練 (Pre-training) - 填空大師</h3>
+        <p>工程師把網路上幾十 TB 的文章、維基百科、程式碼全部倒給模型。它的訓練目標只有一個：<strong>「蓋住下一個字，猜出這個字是什麼」</strong>（Self-supervised Learning 自監督學習）。</p>
+        <ul class="dense-list">
+          <li>這階段的模型「博學多聞，但沒有家教」。</li>
+          <li>你如果問它「台灣的首都」，它可能會回答「台灣的首都位於...」，而不是直接給你答案，因為它只會「順著句子接下去」。</li>
+        </ul>
+      </div>
+      <div class="two-col" style="margin-top:16px">
+        <div class="note-box">
+          <h3>2. 階段二：指令微調 (Instruction Fine-Tuning)</h3>
+          <p>為了讓它變成有用的助手，人類會提供高質量的「問答範例（Q&A 格式）」。這階段資料量不大，但品質極高。</p>
+          <ul class="dense-list">
+            <li>模型學會了「當人類提出問題 (Instruction) 時，我必須給出有用的回答 (Response)」。</li>
+            <li>這就是 ChatGPT 和一般語言模型的區別。它學會了「服從指令」。</li>
+          </ul>
+        </div>
+        <div class="note-box">
+          <h3>3. 階段三：對齊 (Alignment / RLHF)</h3>
+          <p>有時候模型還是會回答出危險或歧視的內容。所以最後一步，是讓人來給模型的回答「打分數」（RLHF - 人類回饋強化學習）。高分獎勵，低分懲罰。讓它的價值觀對齊人類的道德底線。</p>
+        </div>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
+    </section>
+
+    <section id="step2" class="card lesson-step">
+      <h2>Step 2｜你先說</h2>
+      <p>請你回答：</p>
+      <ul class="dense-list">
+        <li>如果我們把龐德比喻成一個新進員工，他的「大學通識教育」對應的是哪一個訓練階段？那他的「BeeBond 公司內部職前訓練」對應的又是哪一個階段？</li>
+        <li>為什麼我們不能只靠「預訓練 (讀萬卷書)」就直接叫模型來做客服？它會犯什麼錯？</li>
+      </ul>
+      <textarea id="selfExplain" placeholder="代入你訓練新人的經驗。"></textarea>
+      <div class="actions">
+        <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
+        <button class="btn secondary" onclick="goStep(1)">回上一步</button>
+      </div>
+      <div id="selfFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step3" class="card lesson-step">
+      <h2>Step 3｜驗收問題</h2>
+      <p>答對 2 / 3 就過關。</p>
+      <div class="q" data-answer="b">
+        <h3>1. 預訓練 (Pre-training) 的主要目的是什麼？</h3>
+        <button class="quiz-option" data-choice="a">教導模型如何寫出完美的 Python 程式碼</button>
+        <button class="quiz-option" data-choice="b">透過海量無標註文本，讓模型學會語言的機率分佈與世界知識</button>
+        <button class="quiz-option" data-choice="c">讓模型學會如何拒絕回答危險問題</button>
+      </div>
+      <div class="q" data-answer="c">
+        <h3>2. 只有經過預訓練，但沒有經過指令微調 (Instruction Fine-Tuning) 的模型會有什麼行為？</h3>
+        <button class="quiz-option" data-choice="a">它會變成超級助理，能完美解決所有問題</button>
+        <button class="quiz-option" data-choice="b">它會完全失去說話能力</button>
+        <button class="quiz-option" data-choice="c">你問它問題，它可能會反問你另一個問題，或者只是順著你的話繼續接龍下去</button>
+      </div>
+      <div class="q" data-answer="b">
+        <h3>3. 什麼是 RLHF (基於人類回饋的強化學習)？</h3>
+        <button class="quiz-option" data-choice="a">利用機器人來訓練機器人</button>
+        <button class="quiz-option" data-choice="b">讓人類對模型的輸出結果進行評分排序，從而對齊 (Align) 模型的行為與人類價值觀</button>
+        <button class="quiz-option" data-choice="c">讓模型直接從網路上爬取使用者資料</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
+        <button class="btn secondary" onclick="goStep(2)">回上一步</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step4" class="card lesson-step">
+      <h2>Step 4｜你的複習卡 + 我的見解</h2>
+      <div class="summary">
+        <div class="mini">
+          <h3>你的複習卡</h3>
+          <div id="userReviewCard" class="user-box">你在前面寫下的答案，會整理在這裡。</div>
+        </div>
+        <div class="mini">
+          <h3>龐德的見解</h3>
+          <p>大模型廠商（如 OpenAI、Google）花幾千萬美金做的事，就是幫我們完成「預訓練」跟基礎的「指令微調」。</p>
+          <p><strong>而 BeeBond 的核心價值，是在這之上，用語境 (Context)、系統提示詞 (System Prompt) 和工具流，對模型進行最後一哩路的「專業行為對齊」。這就是我們戰隊的實力所在。</strong></p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="goStep(3)">回測驗</button>
+        <button class="btn primary" onclick="location.href='lesson-13.html'">前往 Lesson 13</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    let currentStep = 1;
+    let savedAnswer = '';
+    function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('通識')||text.includes('預訓練')||text.includes('職前訓練')||text.includes('微調'))) notes.push('提醒：通識教育是預訓練（學知識），職前訓練是微調（學規矩與格式）。');if(!(text.includes('客服')||text.includes('答非所問')||text.includes('接龍'))) notes.push('提醒：未微調的模型只會順著句意接龍，不懂得扮演客服回答問題。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>這個比喻非常精確，你完全理解了模型訓練的階段意義。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
+    function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
+  </script>
+</body>
+</html>

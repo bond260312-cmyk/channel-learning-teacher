@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奇哥 AI 學習站｜Lesson 16</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="topbar">
+      <div class="pill">Lesson 16 / Evaluation</div>
+      <h1>Lesson 16｜模型驗收怎麼做？</h1>
+      <p>前面學了怎麼訓練、怎麼寫 Prompt，這堂課我們來學驗收。怎麼判斷一個模型到底夠不夠聰明？我們該看那些華麗的 Benchmark 榜單嗎？</p>
+      <div class="progress">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
+      </div>
+      <div class="step-nav">
+        <div class="step-chip active" data-step-chip="1">1 講解</div>
+        <div class="step-chip" data-step-chip="2">2 你先說</div>
+        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="4">4 複習卡</div>
+      </div>
+      <a class="back-link" href="./index.html">← 回課程入口</a>
+    </section>
+
+    <section id="step1" class="card lesson-step active">
+      <h2>Step 1｜榜單的迷思與真實的驗收</h2>
+      <div class="quote"><strong>一句話版本：</strong> 別人家的考卷（Benchmark）考 100 分，不代表它能做好你的業務。真實的 Evaluation (驗收)，是拿你的真實任務與工作流，做「盲測對比」。</div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>1. 榜單污染 (Benchmark Contamination)</h3>
+        <p>你一定看過那些發布會說「我們的模型在數學 MMLU 測驗打敗了 GPT-4！」。這有什麼問題？</p>
+        <p>問題是，<strong>這些考題很可能早就混在它的訓練資料裡了。</strong> 就像一個學生考前偷看了期末考卷，他考 100 分，你敢說他真的懂微積分嗎？這就叫「榜單污染」。</p>
+      </div>
+      <div class="two-col" style="margin-top:16px">
+        <div class="note-box">
+          <h3>2. 人工盲測 (Human Evaluation)</h3>
+          <p>與其看冷冰冰的數字，不如像「LMSYS Chatbot Arena (聊天機器人競技場)」一樣：把兩個模型遮住名字，丟給真人去盲測投票。誰回答得比較好，誰就贏。這目前是最公認的排名方式（Elo Rating）。</p>
+        </div>
+        <div class="note-box">
+          <h3>3. 我們 BeeBond 的驗收法：Workflow Evaluation</h3>
+          <p>對我們來說，模型會不會算高階微積分根本不重要。我們在乎的是：它能不能在一分鐘內把 4 軌的多機位音訊切出正確的 FCPXML 刀位？</p>
+          <p><strong>把專案的「輸入」與「預期輸出」定義清楚（Acceptance Criteria），讓 Agent 跑一遍，比對正確率，才是最鐵血的驗收。</strong></p>
+        </div>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
+    </section>
+
+    <section id="step2" class="card lesson-step">
+      <h2>Step 2｜你先說</h2>
+      <p>請你回答：</p>
+      <ul class="dense-list">
+        <li>如果今天有一個業務來推銷「這個新模型在某項考試成績是世界第一，你一定要買」，你會怎麼用「榜單污染」或「業務不吻合」的理由回絕他？</li>
+        <li>你會怎麼設計我們「多機位初剪專案」的驗收標準？（什麼樣的產出才叫「過了」？）</li>
+      </ul>
+      <textarea id="selfExplain" placeholder="代入你檢驗軟體產品時的龜毛標準。"></textarea>
+      <div class="actions">
+        <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
+        <button class="btn secondary" onclick="goStep(1)">回上一步</button>
+      </div>
+      <div id="selfFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step3" class="card lesson-step">
+      <h2>Step 3｜驗收問題</h2>
+      <p>答對 2 / 3 就過關。</p>
+      <div class="q" data-answer="b">
+        <h3>1. 關於模型評測榜單 (Benchmark)，下列哪個敘述最符合現實狀況？</h3>
+        <button class="quiz-option" data-choice="a">榜單成績代表一切，分數越高的模型在任何工作上都保證越強</button>
+        <button class="quiz-option" data-choice="b">榜單成績可能會因為訓練資料中包含了測試題（榜單污染）而失真，無法完全反映真實智力</button>
+        <button class="quiz-option" data-choice="c">榜單成績都是由人類工程師隨意填寫的</button>
+      </div>
+      <div class="q" data-answer="c">
+        <h3>2. 什麼是「聊天機器人競技場 (Chatbot Arena)」的運作方式？</h3>
+        <button class="quiz-option" data-choice="a">讓兩個模型互相攻擊對方的程式碼</button>
+        <button class="quiz-option" data-choice="b">讓模型跑 10 萬題數學考卷算總分</button>
+        <button class="quiz-option" data-choice="c">讓人類使用者向兩個匿名模型發問，由人類來盲測投票選出回答得比較好的一個</button>
+      </div>
+      <div class="q" data-answer="c">
+        <h3>3. 對於 BeeBond 團隊導入 AI 來說，最務實的驗收方法是什麼？</h3>
+        <button class="quiz-option" data-choice="a">只看原廠發表的論文成績</button>
+        <button class="quiz-option" data-choice="b">讓它講個笑話看好不好笑</button>
+        <button class="quiz-option" data-choice="c">建立自己的測試集與 Checklist，用真實的業務工作流（如腳本生成或初剪程式）跑一次，檢驗產出是否符合商業標準</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
+        <button class="btn secondary" onclick="goStep(2)">回上一步</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step4" class="card lesson-step">
+      <h2>Step 4｜你的複習卡 + 我的見解</h2>
+      <div class="summary">
+        <div class="mini">
+          <h3>你的複習卡</h3>
+          <div id="userReviewCard" class="user-box">你在前面寫下的答案，會整理在這裡。</div>
+        </div>
+        <div class="mini">
+          <h3>龐德的見解</h3>
+          <p>不要沉迷於模型跑分。我們的原則一直都是：<strong>沒有證據不算進度，沒有對接實體產出不算驗收。</strong></p>
+          <p>這也就是為什麼，我每次完成任務都要把檔案丟到你的桌面上讓你親自打開檢查。因為「能用」永遠比「高分」重要。</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="goStep(3)">回測驗</button>
+        <button class="btn primary" onclick="location.href='lesson-17.html'">前往 Lesson 17</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    let currentStep = 1;
+    let savedAnswer = '';
+    function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('考卷')||text.includes('污染')||text.includes('背答案')||text.includes('業務'))) notes.push('提醒：背來的考題高分，不代表它能聽懂你的業務痛點。');if(!(text.includes('真實')||text.includes('工作流')||text.includes('FCPXML')||text.includes('產出'))) notes.push('提醒：我們最鐵血的驗收，就是把專案產出物親自跑一次。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>沒錯，這才是我們實戰派的驗收標準。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
+    function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
+  </script>
+</body>
+</html>

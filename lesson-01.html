@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奇哥 AI 學習站｜Lesson 1</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.note-box p:last-child{margin-bottom:0}.user-box{white-space:pre-wrap}@media (max-width:760px){.step-nav,.summary{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="topbar">
+      <div class="pill">Lesson 1 / Context Engineering</div>
+      <h1>奇哥 AI 學習站</h1>
+      <p>先講解，再讓你自己回答；你的觀點會在後段才出現，變成你的複習卡，而不是我先替你講。</p>
+      <div class="progress">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
+      </div>
+      <div class="step-nav">
+        <div class="step-chip active" data-step-chip="1">1 講解</div>
+        <div class="step-chip" data-step-chip="2">2 你先說</div>
+        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="4">4 複習卡</div>
+      </div>
+      <a class="back-link" href="../../index.html">← 回總入口</a>
+    </section>
+
+    <section id="step1" class="card lesson-step active">
+      <h2>Step 1｜先把概念講懂</h2>
+      <div class="quote"><strong>一句話先講懂：</strong> Context Engineering，就是替 AI 模型安排它每一輪到底該看到哪些資訊，讓它在有限記憶下仍能把事做對。</div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>為什麼這件事重要？</h3>
+        <p>很多人會以為模型夠強、prompt 寫得漂亮就夠了，但當任務開始有工具、有歷史、有多步驟決策時，真正的問題會變成：<strong>下一輪到底該讓模型看到什麼？</strong> 如果這件事做不好，再強的模型也會因為上下文混亂而失真。</p>
+      </div>
+      <div class="summary" style="margin-top:16px">
+        <div class="mini">
+          <h3>核心觀念拆解</h3>
+          <ul class="dense-list">
+            <li>LLM 只看當下收到的輸入，不會自然保留完整歷史。</li>
+            <li>工具使用一多，上下文會快速膨脹，不能無限塞回模型。</li>
+            <li>Agent 的工作，是篩選、整理、壓縮、排序後，再把最有用的上下文送回模型。</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h3>實際流程</h3>
+          <ol class="dense-list">
+            <li>收到任務</li>
+            <li>模型做出工具使用決策</li>
+            <li>工具回傳結果</li>
+            <li>Agent 判斷哪些歷史與結果要保留</li>
+            <li>重新組成下一輪上下文</li>
+            <li>再交給模型做下一步判斷</li>
+          </ol>
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>容易誤解的地方</h3>
+        <ul class="dense-list">
+          <li>它不是單純把 prompt 寫漂亮而已。</li>
+          <li>它不是把所有資料全部塞進去就比較好。</li>
+          <li>它的關鍵是「選對資訊」，不是「塞更多資訊」。</li>
+        </ul>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
+    </section>
+
+    <section id="step2" class="card lesson-step">
+      <h2>Step 2｜你先說</h2>
+      <p>現在才輪到你的觀點。你先用自己的方式回答：</p>
+      <ul class="dense-list">
+        <li>什麼是 Context Engineering？</li>
+        <li>為什麼不能把所有歷史都塞回模型？</li>
+        <li>如果你要用一個工作比喻講，你會怎麼講？</li>
+      </ul>
+      <textarea id="selfExplain" placeholder="先用你的語言講，不用追求完美。"></textarea>
+      <div class="actions">
+        <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
+        <button class="btn secondary" onclick="goStep(1)">回上一步</button>
+      </div>
+      <div id="selfFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step3" class="card lesson-step">
+      <h2>Step 3｜驗收問題</h2>
+      <p>答對 2 / 3，代表你已經過基本理解門檻。</p>
+      <div class="q" data-answer="b">
+        <h3>1. 為什麼模型不能只拿到最新工具輸出就繼續做事？</h3>
+        <button class="quiz-option" data-choice="a">因為模型速度太慢</button>
+        <button class="quiz-option" data-choice="b">因為模型還需要前情、目標與保留過的重點脈絡</button>
+        <button class="quiz-option" data-choice="c">因為工具輸出通常不能看</button>
+      </div>
+      <div class="q" data-answer="c">
+        <h3>2. 為什麼不是把所有歷史全部塞給模型就最好？</h3>
+        <button class="quiz-option" data-choice="a">因為模型會生氣</button>
+        <button class="quiz-option" data-choice="b">因為資料越少越準</button>
+        <button class="quiz-option" data-choice="c">因為上下文有限，重點是選對資訊，不是全塞</button>
+      </div>
+      <div class="q" data-answer="a">
+        <h3>3. 如果你要向別人解釋 Context Engineering，哪個比喻最貼切？</h3>
+        <button class="quiz-option" data-choice="a">幕僚長整理 briefing 給顧問</button>
+        <button class="quiz-option" data-choice="b">剪接師把全部素材同時丟上時間軸</button>
+        <button class="quiz-option" data-choice="c">把所有檔案都放桌面就會更有效率</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
+        <button class="btn secondary" onclick="goStep(2)">回上一步</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step4" class="card lesson-step">
+      <h2>Step 4｜你的複習卡 + 我的見解</h2>
+      <div class="summary">
+        <div class="mini">
+          <h3>你的複習卡</h3>
+          <div id="userReviewCard" class="user-box value muted">你在前面寫下的答案，會整理在這裡。</div>
+        </div>
+        <div class="mini">
+          <h3>龐德的見解</h3>
+          <p>這一課真正要抓住的不是名詞，而是一個管理能力：<strong>模型不是因為拿到更多資訊就更強，而是因為拿到更對的資訊才更準。</strong></p>
+          <p>所以 Context Engineering 的核心，不是寫一個漂亮 prompt，而是像幕僚長一樣，知道什麼該保留、什麼該丟、什麼該現在給、什麼該下一輪再給。</p>
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>最後一句話</h3>
+        <p><strong>Context Engineering 不是把更多資訊塞給模型，而是把對的資訊在對的時機整理給模型。</strong></p>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="goStep(3)">回測驗</button>
+        <button class="btn primary" onclick="location.href='lesson-02.html'">前往 Lesson 2</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    let savedAnswer = '';
+    function goStep(step){
+      currentStep = step;
+      document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));
+      document.getElementById('step'+step).classList.add('active');
+      document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));
+      document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');
+      document.getElementById('progressBar').style.width = (step*25)+'%';
+      document.getElementById('progressLabel').textContent = '目前進度：' + step + ' / 4';
+      if(step===4){ document.getElementById('userReviewCard').textContent = savedAnswer || '你還沒有留下答案。'; }
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function reviewAnswer(){
+      const text=document.getElementById('selfExplain').value.trim();
+      const box=document.getElementById('selfFeedback');
+      if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先講出你的版本，再往下走。';return;}
+      savedAnswer = text;
+      let notes=[];
+      if(!(text.includes('整理')||text.includes('篩')||text.includes('briefing'))) notes.push('補一句：核心不是堆資料，而是整理後再送進模型。');
+      if(!(text.includes('有限')||text.includes('全部')||text.includes('記憶'))) notes.push('再補一句：因為模型上下文有限，所以不能把所有歷史都塞回去。');
+      box.className='feedback ok'; box.style.display='block';
+      box.innerHTML='收到，你的觀點已經保留下來。' + (notes.length?'<br><br>'+notes.join('<br>'):'<br><br>你的方向已經抓到重點。') + '<br><br>現在進驗收。';
+      setTimeout(()=>goStep(3),500);
+    }
+    document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
+    function gradeQuiz(){
+      const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;
+      qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;} if(s.dataset.choice===q.dataset.answer)score++;});
+      const box=document.getElementById('quizFeedback');
+      if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}
+      if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，已過基本理解門檻。'; setTimeout(()=>goStep(4),500);} else {box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 重看講解。';}
+    }
+  </script>
+</body>
+</html>

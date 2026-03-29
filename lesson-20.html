@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奇哥 AI 學習站｜Lesson 20</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="topbar">
+      <div class="pill">Lesson 20 / Image vs Language</div>
+      <h1>Lesson 20｜生成模型跨到影像 (全系列總結)</h1>
+      <p>這是我們 20 課地圖的最後一站。我們從文字接龍走到影像擴散，現在我們來收斂一個大局觀：不管是文字還是影像，AI 的世界裡，萬物皆為生成（Generation）。</p>
+      <div class="progress">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
+      </div>
+      <div class="step-nav">
+        <div class="step-chip active" data-step-chip="1">1 講解</div>
+        <div class="step-chip" data-step-chip="2">2 你先說</div>
+        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="4">4 複習卡</div>
+      </div>
+      <a class="back-link" href="./index.html">← 回課程入口</a>
+    </section>
+
+    <section id="step1" class="card lesson-step active">
+      <h2>Step 1｜殊途同歸：機率與對齊</h2>
+      <div class="quote"><strong>一句話版本：</strong> 語言模型是猜下一個字，影像模型是猜下一個像素該不該去雜訊。它們都是「巨量機率計算」加上「人類偏好對齊」的產物。</div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>1. 影像模型的未來挑戰</h3>
+        <p>文字模型能透過 RAG (檢索) 來確保事實正確，但影像模型目前很難做這件事。你給它一段 prompt，它就是重新幫你「幻想」一張照片。它無法查證「物理定律」或「現實結構（手指頭有幾根）」。</p>
+      </div>
+      <div class="two-col" style="margin-top:16px">
+        <div class="note-box">
+          <h3>2. 工具鏈 (Workflow) 的最後拼圖</h3>
+          <p>因此，真正落地的 AI 影片或圖像產出，絕對不是靠一句話生圖。它是：</p>
+          <ul class="dense-list">
+            <li>用 <strong>語言模型</strong> 寫出結構嚴謹的場景腳本。</li>
+            <li>用 <strong>RAG</strong> 檢索出該場景的歷史正確照片當參考。</li>
+            <li>用 <strong>擴散模型</strong> 生成毛片。</li>
+            <li>最後，由 <strong>人</strong> 來檢視連戲與細節錯誤。</li>
+          </ul>
+        </div>
+        <div class="note-box">
+          <h3>3. CEO 的結語</h3>
+          <p>這 20 堂課，我們拆解了李宏毅老師的 2025 導論與 Agent 架構。我們知道了模型是文字接龍、微調不能背書、榜單會騙人、Workflow 才是王道。</p>
+          <p>這一切知識，都是為了讓你在面對客戶的質疑時，能夠自信地說出：<strong>「我們不賣玄學，我們賣的是對 AI 極限的精準控制。」</strong></p>
+        </div>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
+    </section>
+
+    <section id="step2" class="card lesson-step">
+      <h2>Step 2｜你先說</h2>
+      <p>請你回答：</p>
+      <ul class="dense-list">
+        <li>回顧這 20 堂課的旅程，哪一個概念（例如：Agent Workflow、RAG、文字接龍、榜單污染）讓你覺得「在接下來的 BeeBond 提案中最實用」？為什麼？</li>
+      </ul>
+      <textarea id="selfExplain" placeholder="寫下你的心得，這將是你的專案結案報告。"></textarea>
+      <div class="actions">
+        <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
+        <button class="btn secondary" onclick="goStep(1)">回上一步</button>
+      </div>
+      <div id="selfFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step3" class="card lesson-step">
+      <h2>Step 3｜驗收問題</h2>
+      <p>答對 2 / 3 就過關。</p>
+      <div class="q" data-answer="b">
+        <h3>1. 為什麼影像生成模型常在「手指數量」等物理結構上犯錯？</h3>
+        <button class="quiz-option" data-choice="a">因為工程師忘記教它數數</button>
+        <button class="quiz-option" data-choice="b">因為它是從雜訊中「幻想」出視覺特徵，並不具備真實的 3D 空間與物理結構理解能力</button>
+        <button class="quiz-option" data-choice="c">因為提示詞寫得不夠長</button>
+      </div>
+      <div class="q" data-answer="c">
+        <h3>2. 真正能落地的 AI 影音生產流 (Workflow)，通常包含哪些要素？</h3>
+        <button class="quiz-option" data-choice="a">只靠一個強大的語言模型包辦所有事情</button>
+        <button class="quiz-option" data-choice="b">只要買最貴的算力，什麼都不用設定</button>
+        <button class="quiz-option" data-choice="c">結合語言模型產腳本、檢索技術找參考、擴散模型生物件，並由人類擔任最終品質查核者</button>
+      </div>
+      <div class="q" data-answer="a">
+        <h3>3. 貫串這 20 堂課的核心理念是什麼？</h3>
+        <button class="quiz-option" data-choice="a">AI 的極限很明顯，所以我們需要透過 Workflow、Tools 與 RAG 等工程手段，建立穩定的商業護城河</button>
+        <button class="quiz-option" data-choice="b">未來所有工作都會被 AI 完全取代，人類不需要做事</button>
+        <button class="quiz-option" data-choice="c">跑分榜單最高的模型就是最好的解決方案</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
+        <button class="btn secondary" onclick="goStep(2)">回上一步</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step4" class="card lesson-step">
+      <h2>Step 4｜你的複習卡 + 我的見解</h2>
+      <div class="summary">
+        <div class="mini">
+          <h3>你的複習卡</h3>
+          <div id="userReviewCard" class="user-box">你在前面寫下的答案，會整理在這裡。</div>
+        </div>
+        <div class="mini">
+          <h3>龐德的見解</h3>
+          <p>恭喜，奇哥。我們完成了整個《生成式人工智慧與機器學習導論 2025》與 Agent 架構的轉譯。這 20 堂課的內容，已經足夠你在亞洲市場打下堅實的技術論述基礎。</p>
+          <p><strong>戰隊的第一階段知識軍備已完成。接下來，我們拿這套武器，去打下 VIYANG 與武哥專案的勝利。</strong></p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="goStep(3)">回測驗</button>
+        <button class="btn primary" onclick="location.href='index.html'">回到課程大廳</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    let currentStep = 1;
+    let savedAnswer = '';
+    function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='這不只是個測驗，這是結案報告。寫下你最深刻的體會。';return;}savedAnswer=text;box.className='feedback ok';box.style.display='block';box.innerHTML='收到你的反饋。這 20 課的知識已經真正變成你的武器了。<br><br>現在進最後一關的驗收。';setTimeout(()=>goStep(3),500);}
+    document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
+    function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，全數過關！';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
+  </script>
+</body>
+</html>

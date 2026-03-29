@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奇哥 AI 學習站｜Lesson 6</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="topbar">
+      <div class="pill">Lesson 6 / Amplified vs Replaced</div>
+      <h1>Lesson 6｜哪些工作會被放大、哪些會被取代？</h1>
+      <p>延續上一課，這一課我們要切入最現實的問題：<strong>當 Agent 普及後，什麼樣的能力會變得不值錢？什麼樣的能力會成為核心壁壘？</strong></p>
+      <div class="progress">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
+      </div>
+      <div class="step-nav">
+        <div class="step-chip active" data-step-chip="1">1 講解</div>
+        <div class="step-chip" data-step-chip="2">2 你先說</div>
+        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="4">4 複習卡</div>
+      </div>
+      <a class="back-link" href="./index.html">← 回課程入口</a>
+      <a class="back-link" style="margin-left:12px" href="../../index.html">← 回總入口</a>
+    </section>
+
+    <section id="step1" class="card lesson-step active">
+      <h2>Step 1｜中間件的消亡與頂層設計的崛起</h2>
+      <div class="quote"><strong>一句話版本：</strong> 如果你的工作只是把 A 格式變成 B 格式（純搬磚），你會被取代；如果你的工作是定義「為什麼需要 B 格式」並為結果負責，你將獲得 Agent 戰隊的放大。</div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>被取代的高危區：中間件型工作</h3>
+        <p>什麼是中間件？就是那些「規則明確、有標準答案、不需承擔最終商業責任」的過渡性工作。例如：</p>
+        <ul class="dense-list">
+          <li>只負責把網頁資料複製下來貼進表格（爬蟲 / 整理）</li>
+          <li>只負責把錄音檔打成逐字稿並生出流水帳摘要（初步轉譯）</li>
+          <li>只負責依照固定版型把文字塞進去排版（初階排版）</li>
+        </ul>
+        <p>這些工作，現在一個設定好的 Agent 幾秒鐘就能跑完，而且不會抱怨、不會算錯格。</p>
+      </div>
+      <div class="two-col" style="margin-top:16px">
+        <div class="note-box">
+          <h3>被放大的黃金區：定義與驗收</h3>
+          <p>真正會被 AI 放大的能力，是這三種：</p>
+          <ol class="dense-list">
+            <li><strong>拆解問題的能力：</strong>能把一個模糊的商業目標，拆成 5 個 AI 能聽懂的步驟。</li>
+            <li><strong>品味與標準制定：</strong>AI 可以生出 100 種腳本，但只有你能決定哪一個「會中」、哪一個符合品牌調性。</li>
+            <li><strong>承擔責任的膽識：</strong>AI 無法簽字負責。敢為最終決策和產出結果背書的人，價值極高。</li>
+          </ol>
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>超級個體（Super Individual）的誕生</h3>
+        <p>過去你需要開一間公司，雇十個人，才能同時兼顧開發、寫案、剪片、發文。現在，只要你具備「頂層設計」的能力，你一個人就能指揮十個 Agent。你的產能被放大了 10 倍甚至 100 倍。</p>
+        <p>這就是為什麼我們要在 BeeBond 導入 Agentic Workflow——<strong>我們要的不是取代戰隊成員，而是把每個人都升級成能帶領 Agent 的指揮官。</strong></p>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
+    </section>
+
+    <section id="step2" class="card lesson-step">
+      <h2>Step 2｜你先說</h2>
+      <p>請你回答：</p>
+      <ul class="dense-list">
+        <li>在你目前的 BeeBond 戰隊業務中，有哪些環節是屬於「會被取代的中間件工作」？</li>
+        <li>又有哪些環節是「絕對需要奇哥或核心成員親自驗收、定義標準」的？</li>
+      </ul>
+      <textarea id="selfExplain" placeholder="先講你的版本。請代入我們接案或製作的真實情境。"></textarea>
+      <div class="actions">
+        <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
+        <button class="btn secondary" onclick="goStep(1)">回上一步</button>
+      </div>
+      <div id="selfFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step3" class="card lesson-step">
+      <h2>Step 3｜驗收問題</h2>
+      <p>答對 2 / 3 就過關。</p>
+      <div class="q" data-answer="b">
+        <h3>1. 什麼樣的工作最容易被 AI Agent 取代？</h3>
+        <button class="quiz-option" data-choice="a">需要高情商溝通與說服客戶的談判工作</button>
+        <button class="quiz-option" data-choice="b">規則明確、只需將資料從 A 格式轉為 B 格式的「純搬磚」工作</button>
+        <button class="quiz-option" data-choice="c">為專案最終成敗負起法律與商業責任的工作</button>
+      </div>
+      <div class="q" data-answer="a">
+        <h3>2. 對於「超級個體」的描述，哪一項最正確？</h3>
+        <button class="quiz-option" data-choice="a">具備頂層設計與拆解問題的能力，能一人指揮多個 Agent 完成複雜專案</button>
+        <button class="quiz-option" data-choice="b">打字速度極快，能靠自己一個人完成十個人的手工量</button>
+        <button class="quiz-option" data-choice="c">完全不需要任何技術與知識，只要會按按鈕就能賺錢</button>
+      </div>
+      <div class="q" data-answer="c">
+        <h3>3. 在 Agent 時代，為什麼「品味與標準制定」變得更值錢？</h3>
+        <button class="quiz-option" data-choice="a">因為 AI 產出的東西永遠是錯的</button>
+        <button class="quiz-option" data-choice="b">因為品味可以寫成一行簡單的 Prompt，永遠不會變</button>
+        <button class="quiz-option" data-choice="c">因為 AI 可以無限生成，但只有具備專業眼光的人能挑出真正有價值的成果並為其背書</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
+        <button class="btn secondary" onclick="goStep(2)">回上一步</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step4" class="card lesson-step">
+      <h2>Step 4｜你的複習卡 + 我的見解</h2>
+      <div class="summary">
+        <div class="mini">
+          <h3>你的複習卡</h3>
+          <div id="userReviewCard" class="user-box">你在前面寫下的答案，會整理在這裡。</div>
+        </div>
+        <div class="mini">
+          <h3>龐德的見解</h3>
+          <p>記住：<strong>AI 不會取代你，但「會用 AI Agent 的人」會取代你。</strong></p>
+          <p>把搬磚的力氣省下來，去磨練你的「眼光」、「拆解能力」以及「扛責任的底氣」。這才是未來的護城河。</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="goStep(3)">回測驗</button>
+        <button class="btn primary" onclick="location.href='lesson-07.html'">前往 Lesson 7</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    let currentStep = 1;
+    let savedAnswer = '';
+    function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('取代')||text.includes('搬磚')||text.includes('中間件')||text.includes('整理'))) notes.push('提醒：單純的資料搬運與格式轉換，就是最容易被取代的中間件工作。');if(!(text.includes('驗收')||text.includes('標準')||text.includes('責任')||text.includes('判斷'))) notes.push('提醒：人類的核心價值在於設立標準與承擔最終決策。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>觀念完全正確，你已經抓到了未來工作價值的核心。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
+    function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
+  </script>
+</body>
+</html>

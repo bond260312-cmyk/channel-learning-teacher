@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奇哥 AI 學習站｜Lesson 15</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="topbar">
+      <div class="pill">Lesson 15 / Model Editing & Merging</div>
+      <h1>Lesson 15｜Model Editing / Merging 差在哪？</h1>
+      <p>如果你發現你的 AI 助理竟然一直堅持「蔡英文是現任總統」，但你只是想改掉這個舊知識，你該把整個模型拿去重訓嗎？這堂課解鎖高階技巧：手術刀與縫合怪。</p>
+      <div class="progress">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
+      </div>
+      <div class="step-nav">
+        <div class="step-chip active" data-step-chip="1">1 講解</div>
+        <div class="step-chip" data-step-chip="2">2 你先說</div>
+        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="4">4 複習卡</div>
+      </div>
+      <a class="back-link" href="./index.html">← 回課程入口</a>
+    </section>
+
+    <section id="step1" class="card lesson-step active">
+      <h2>Step 1｜不動筋骨的精準打擊</h2>
+      <div class="quote"><strong>一句話版本：</strong> Model Editing (模型編輯) 像是一把手術刀，專門切除或修改某個錯誤的記憶；Model Merging (模型融合) 像是把中西醫的能力倒進果汁機打成一杯全能果汁，不用花錢重新訓練。</div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>1. 為什麼需要 Model Editing (模型編輯)？</h3>
+        <p>當你發現模型腦子裡有一個非常具體的錯誤（例如：現任總統是誰），如果你把它拿去 Fine-tuning (微調)，可能會引發<strong>「災難性遺忘」</strong>——它學會了新總統，卻突然忘記了怎麼寫 Python。Model Editing 就是不重訓，直接用數學方法在它的神經網路裡找到那條記憶神經，把它「改掉」。</p>
+      </div>
+      <div class="two-col" style="margin-top:16px">
+        <div class="note-box">
+          <h3>2. 什麼是 Model Merging (模型融合)？</h3>
+          <p>你有一個超會寫公文的開源模型 A，和一個超會寫 Python 的開源模型 B。你不想花大錢把它們重訓在一起，你可以直接把兩個模型的權重（數字矩陣）<strong>相加平均</strong>（例如：A × 0.5 + B × 0.5）。神奇的是，出來的新模型 C 往往能同時具備寫公文和寫 Python 的能力。</p>
+        </div>
+        <div class="note-box">
+          <h3>3. 這跟我們有什麼關係？</h3>
+          <p>開源模型社群（如 HuggingFace）每天都有上千個這樣被「融合」出來的變種模型。身為架構師，當我們需要在本地跑一個垂直領域（如只負責寫 FCPXML）的專用小模型時，懂這些概念，就能在開源市場找到最適合的「縫合怪」來當小弟。</p>
+        </div>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
+    </section>
+
+    <section id="step2" class="card lesson-step">
+      <h2>Step 2｜你先說</h2>
+      <p>請你回答：</p>
+      <ul class="dense-list">
+        <li>如果你的 AI 客服一直把公司老闆的名字念錯，你會建議工程師把整個模型「重新微調 (Fine-tune)」，還是用「模型編輯 (Model Editing)」？為什麼？</li>
+      </ul>
+      <textarea id="selfExplain" placeholder="代入你解決這類奇葩問題時的直覺。"></textarea>
+      <div class="actions">
+        <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
+        <button class="btn secondary" onclick="goStep(1)">回上一步</button>
+      </div>
+      <div id="selfFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step3" class="card lesson-step">
+      <h2>Step 3｜驗收問題</h2>
+      <p>答對 2 / 3 就過關。</p>
+      <div class="q" data-answer="c">
+        <h3>1. 關於 Model Editing (模型編輯)，哪一項敘述最正確？</h3>
+        <button class="quiz-option" data-choice="a">它是用來把兩份不同的資料庫合併在一起的技術</button>
+        <button class="quiz-option" data-choice="b">它需要把模型從頭預訓練一次才能生效</button>
+        <button class="quiz-option" data-choice="c">它是用來精準修改模型內部的特定事實知識，且不需要耗費大量算力重新訓練的技術</button>
+      </div>
+      <div class="q" data-answer="b">
+        <h3>2. 為什麼在修改單一事實錯誤時，直接使用微調 (Fine-tuning) 會有風險？</h3>
+        <button class="quiz-option" data-choice="a">因為微調會讓電腦立刻當機</button>
+        <button class="quiz-option" data-choice="b">因為微調牽一髮動全身，可能會引發「災難性遺忘」，讓模型忘記原本會的其他技能</button>
+        <button class="quiz-option" data-choice="c">因為微調的費用比預訓練還要貴一萬倍</button>
+      </div>
+      <div class="q" data-answer="b">
+        <h3>3. Model Merging (模型融合) 的最大優點是什麼？</h3>
+        <button class="quiz-option" data-choice="a">它可以讓模型的體積縮小到原來的一半</button>
+        <button class="quiz-option" data-choice="b">它可以不用重新訓練，直接將不同專長模型的權重合併，產生具備多種能力的新模型</button>
+        <button class="quiz-option" data-choice="c">它可以讓沒有聯網的模型立刻具有即時搜尋能力</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
+        <button class="btn secondary" onclick="goStep(2)">回上一步</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step4" class="card lesson-step">
+      <h2>Step 4｜你的複習卡 + 我的見解</h2>
+      <div class="summary">
+        <div class="mini">
+          <h3>你的複習卡</h3>
+          <div id="userReviewCard" class="user-box">你在前面寫下的答案，會整理在這裡。</div>
+        </div>
+        <div class="mini">
+          <h3>龐德的見解</h3>
+          <p>不要把大模型當作一個神聖不可侵犯的黑盒子。在真正的開源世界裡，模型就像是樂高積木，有人切掉壞掉的積木（Editing），有人把兩種積木融在一起（Merging）。</p>
+          <p><strong>知道這些招式，我們未來在挑選、部署專案級 AI 戰隊時，就不會被原廠的標準品綁死。</strong></p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="goStep(3)">回測驗</button>
+        <button class="btn primary" onclick="location.href='lesson-16.html'">前往 Lesson 16</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    let currentStep = 1;
+    let savedAnswer = '';
+    function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('Editing')||text.includes('模型編輯')||text.includes('精準')||text.includes('忘記'))) notes.push('提醒：請強調微調可能會導致「災難性遺忘」，所以單點錯誤應該用 Model Editing。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>正確，精準切除錯誤記憶，這就是手術刀的用法。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
+    function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
+  </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奇哥 AI 學習站｜Lesson 4</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="topbar">
+      <div class="pill">Lesson 4 / Handoff & Context Transfer</div>
+      <h1>Lesson 4｜Handoff / 分工 / 上下文交接</h1>
+      <p>這一課是多 agent 能不能真的落地的核心：<strong>切工作不難，難的是交接後還能不失真。</strong> Handoff 做不好，分工越多，品質越碎。</p>
+      <div class="progress">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
+      </div>
+      <div class="step-nav">
+        <div class="step-chip active" data-step-chip="1">1 講解</div>
+        <div class="step-chip" data-step-chip="2">2 你先說</div>
+        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="4">4 複習卡</div>
+      </div>
+      <a class="back-link" href="./index.html">← 回課程入口</a>
+      <a class="back-link" style="margin-left:12px" href="../../index.html">← 回總入口</a>
+    </section>
+
+    <section id="step1" class="card lesson-step active">
+      <h2>Step 1｜先把 handoff 的本質講懂</h2>
+      <div class="quote"><strong>一句話版本：</strong> Handoff 不是單純把工作丟給下一個 agent，而是把「下一個人做對事所需要的最小充分資訊」交清楚。</div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>為什麼 handoff 會成為瓶頸？</h3>
+        <p>因為 agent 之間不像人類團隊那樣真的共享腦袋。上一個 agent 知道的事，下一個 agent 不會自動知道。你如果只是說「請接手」，等於什麼都沒交。下一位不是重做，就是亂補。</p>
+        <p>所以 handoff 的難點在於：<strong>怎麼在有限上下文裡，把必要資訊交得完整，但又不把垃圾一起帶過去。</strong></p>
+      </div>
+      <div class="two-col" style="margin-top:16px">
+        <div class="note-box">
+          <h3>一個好的 handoff 至少要有</h3>
+          <ul class="dense-list">
+            <li><strong>任務目標：</strong>下一位到底要完成什麼。</li>
+            <li><strong>目前狀態：</strong>已做了哪些、做到哪裡。</li>
+            <li><strong>重要結論：</strong>前一步已經確認的事，不要讓下一位重算。</li>
+            <li><strong>限制與風險：</strong>不能碰什麼、哪裡不確定。</li>
+            <li><strong>輸出格式：</strong>你希望下一位交回什麼樣子。</li>
+          </ul>
+        </div>
+        <div class="note-box">
+          <h3>常見失敗 handoff 長這樣</h3>
+          <ul class="dense-list">
+            <li>只有一句「請接續完成」。</li>
+            <li>把整包原始資料丟過去，沒有摘要與優先順序。</li>
+            <li>沒有說哪些結論已定、哪些還是假設。</li>
+            <li>沒有交輸出標準，讓下一位猜規格。</li>
+            <li>把噪音也一起帶走，害下游判斷污染。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>Handoff 其實像交班，不是甩鍋</h3>
+        <p>你可以把它想成醫院交班、專案交接、剪接案從研究交給腳本。真正好的交接不是「我做完了，你看著辦」，而是「我已經幫你把路清到這裡，以下這些是你接下來最該看的資訊」。</p>
+        <p>如果上一位沒整理，下游就會面對三種壞事：</p>
+        <ol class="dense-list">
+          <li>重新做一遍，浪費成本。</li>
+          <li>理解錯方向，直接偏航。</li>
+          <li>看太多雜訊，反而把關鍵忽略。</li>
+        </ol>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>實作上怎麼減少失真？</h3>
+        <ul class="dense-list">
+          <li>把交接內容結構化，例如目標 / 完成狀態 / 關鍵證據 / 未解問題。</li>
+          <li>明確區分「已確認」與「待驗證」，避免假設被誤當結論。</li>
+          <li>盡量傳遞必要摘要，而不是無差別傳遞全部原文。</li>
+          <li>如果下一步很依賴原始證據，可附精簡引用，而不是整包回灌。</li>
+        </ul>
+        <p>一句話：<strong>handoff 不是資料搬運，是判斷後的交班。</strong></p>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>最重要的成熟觀念</h3>
+        <p>很多系統不是敗在模型，而是敗在交接。前面做得很漂亮，最後一 handoff 寫得像便利貼，整個品質就斷掉。所以設計多 agent 時，<strong>不要只設計角色，也要設計交接語言。</strong></p>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
+    </section>
+
+    <section id="step2" class="card lesson-step">
+      <h2>Step 2｜你先說</h2>
+      <p>請你回答：</p>
+      <ul class="dense-list">
+        <li>Handoff 的本質是什麼？</li>
+        <li>你認為一個好的交接至少要包含哪幾項資訊？</li>
+        <li>如果套進你自己的工作流，最常出問題的交接點會在哪？</li>
+      </ul>
+      <textarea id="selfExplain" placeholder="先講你的版本。請盡量講出『交班』而不是『丟工作』的差別。"></textarea>
+      <div class="actions">
+        <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
+        <button class="btn secondary" onclick="goStep(1)">回上一步</button>
+      </div>
+      <div id="selfFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step3" class="card lesson-step">
+      <h2>Step 3｜驗收問題</h2>
+      <p>答對 2 / 3 就過關。</p>
+      <div class="q" data-answer="b">
+        <h3>1. Handoff 最正確的理解是？</h3>
+        <button class="quiz-option" data-choice="a">把所有資料整包丟給下一位</button>
+        <button class="quiz-option" data-choice="b">把下一位做對事所需的最小充分資訊交清楚</button>
+        <button class="quiz-option" data-choice="c">只告訴下一位任務名稱就夠了</button>
+      </div>
+      <div class="q" data-answer="c">
+        <h3>2. 哪一種最像失敗的 handoff？</h3>
+        <button class="quiz-option" data-choice="a">告知任務目標、已完成進度、未解風險與輸出格式</button>
+        <button class="quiz-option" data-choice="b">用結構化方式區分已確認與待驗證資訊</button>
+        <button class="quiz-option" data-choice="c">只寫「請接手處理」並附上一大包沒整理的原始內容</button>
+      </div>
+      <div class="q" data-answer="a">
+        <h3>3. 為什麼 handoff 設計重要？</h3>
+        <button class="quiz-option" data-choice="a">因為多 agent 之間不共享腦袋，交接爛就會重做、失真或偏航</button>
+        <button class="quiz-option" data-choice="b">因為 handoff 只是形式，不影響品質</button>
+        <button class="quiz-option" data-choice="c">因為每次交接都必須把全部聊天紀錄帶過去</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
+        <button class="btn secondary" onclick="goStep(2)">回上一步</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step4" class="card lesson-step">
+      <h2>Step 4｜你的複習卡 + 我的見解</h2>
+      <div class="summary">
+        <div class="mini">
+          <h3>你的複習卡</h3>
+          <div id="userReviewCard" class="user-box">你在前面寫下的答案，會整理在這裡。</div>
+        </div>
+        <div class="mini">
+          <h3>龐德的見解</h3>
+          <p>一個團隊真正的成熟度，往往不是看誰最會做，而是看<strong>交接時能不能不靠默契也不失真</strong>。Agent 系統更是如此，因為它連默契都沒有。</p>
+          <p>所以 handoff 設計到位，分工才是放大器；handoff 爛，分工就變成品質粉碎機。</p>
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>最後一句話</h3>
+        <p><strong>Handoff 不是把工作甩出去，而是把下一步成功所需的資訊交到位。</strong></p>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="goStep(3)">回測驗</button>
+        <button class="btn primary" onclick="location.href='lesson-05.html'">前往 Lesson 5</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    let currentStep = 1;
+    let savedAnswer = '';
+    function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先講出你的 handoff 觀點。';return;}savedAnswer=text;let notes=[];if(!(text.includes('目標')||text.includes('任務'))) notes.push('補一句：好的交接要先交清楚下一步目標。');if(!(text.includes('狀態')||text.includes('已完成')||text.includes('進度'))) notes.push('補一句：要交代目前做到哪裡，而不是只說接手。');if(!(text.includes('風險')||text.includes('限制')||text.includes('未解'))) notes.push('再補一句：限制、風險、未解點不說，下游很容易偏航。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>你已經抓到交班而不是甩鍋的本質。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
+    function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
+  </script>
+</body>
+</html>

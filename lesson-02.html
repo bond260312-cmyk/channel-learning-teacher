@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奇哥 AI 學習站｜Lesson 2</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.note-box p:last-child{margin-bottom:0}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="topbar">
+      <div class="pill">Lesson 2 / Context Engineering × Workflow</div>
+      <h1>Lesson 2｜上下文工程與工作流的關係</h1>
+      <p>這一課要把一個關鍵誤區拆掉：<strong>context engineering 不是 prompt 小技巧，而是整個工作流怎麼切、怎麼接、怎麼回填資訊的設計能力。</strong></p>
+      <div class="progress">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
+      </div>
+      <div class="step-nav">
+        <div class="step-chip active" data-step-chip="1">1 講解</div>
+        <div class="step-chip" data-step-chip="2">2 你先說</div>
+        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="4">4 複習卡</div>
+      </div>
+      <a class="back-link" href="./index.html">← 回課程入口</a>
+      <a class="back-link" style="margin-left:12px" href="../../index.html">← 回總入口</a>
+    </section>
+
+    <section id="step1" class="card lesson-step active">
+      <h2>Step 1｜先把主軸講穿</h2>
+      <div class="quote"><strong>一句話版本：</strong> Workflow 決定事情分成幾步、每步做什麼；Context Engineering 決定每一步到底拿到哪些資訊。兩者分不開，因為步驟一變，該看的上下文就跟著變。</div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>為什麼不能把它當成 prompt 技巧？</h3>
+        <p>如果你只把 context engineering 理解成「開場白怎麼寫得比較漂亮」，你會忽略真正難的部分：<strong>任務是多步驟的，模型不是只回答一次就結束。</strong> 它可能先判斷要不要查資料，再讀工具輸出，再整理成下一步動作。每往前走一步，需要的資訊都不一樣。</p>
+        <p>所以真正的工程問題不是「第一句怎麼問」，而是：<strong>在第 2 步、第 3 步、第 8 步，哪些資訊還該保留？哪些資訊該壓縮？哪些該轉成結構化摘要？</strong></p>
+      </div>
+      <div class="two-col" style="margin-top:16px">
+        <div class="note-box">
+          <h3>Workflow 在管什麼？</h3>
+          <ul class="dense-list">
+            <li>先規劃，還是先查資料？</li>
+            <li>一個 agent 做到底，還是切給不同角色？</li>
+            <li>什麼時候需要工具呼叫？</li>
+            <li>失敗後要重試、改路徑，還是交給人？</li>
+          </ul>
+        </div>
+        <div class="note-box">
+          <h3>Context Engineering 在管什麼？</h3>
+          <ul class="dense-list">
+            <li>此刻模型該看到任務目標、限制、歷史中的哪一段？</li>
+            <li>工具輸出是原文回灌，還是先摘要？</li>
+            <li>哪些規則要永遠保留，哪些只在某一步出現？</li>
+            <li>不同步驟之間的交接內容如何避免失真？</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>用工作場景講，會更清楚</h3>
+        <p>假設你要做一支影片企劃。Workflow 可能是：需求釐清 → 找資料 → 出大綱 → 改稿 → 產出。那 context engineering 就是在每一步替模型準備 briefing：</p>
+        <ol class="dense-list">
+          <li><strong>需求釐清：</strong>要給目標受眾、影片目的、限制條件。</li>
+          <li><strong>找資料：</strong>要給查詢方向與可信來源標準，不需要把後面剪接需求一起塞進去。</li>
+          <li><strong>出大綱：</strong>要保留前面的核心結論，但不必保留每一筆搜索原始噪音。</li>
+          <li><strong>改稿：</strong>要把前版內容、修改要求、不能動的核心訊息一起交接。</li>
+        </ol>
+        <p>你看，<strong>同一個任務，不同步驟需要不同上下文</strong>。這就是為什麼 workflow 一設計，context engineering 就一定跟著來。</p>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>真正成熟的系統會做的事</h3>
+        <ul class="dense-list">
+          <li>不是把所有聊天紀錄全丟回去，而是依步驟重組。</li>
+          <li>不是每個工具輸出都原封不動回灌，而是先過濾與壓縮。</li>
+          <li>不是讓模型一直自由發揮，而是替它設計好「現在你該做哪一類判斷」。</li>
+        </ul>
+        <p><strong>結論：</strong>Workflow 是骨架，Context Engineering 是送到每個關節的血液。骨架沒有血液，動不起來；只有血液沒有骨架，也只是一灘。</p>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
+    </section>
+
+    <section id="step2" class="card lesson-step">
+      <h2>Step 2｜你先說</h2>
+      <p>請你用自己的話回答三件事：</p>
+      <ul class="dense-list">
+        <li>Workflow 跟 Context Engineering 各自在管什麼？</li>
+        <li>為什麼說 context engineering 不是只有 prompt？</li>
+        <li>請你用一個自己的工作場景，比喻兩者怎麼配合。</li>
+      </ul>
+      <textarea id="selfExplain" placeholder="先講你的版本。用工作、企劃、業務、影片流程來比喻都可以。"></textarea>
+      <div class="actions">
+        <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
+        <button class="btn secondary" onclick="goStep(1)">回上一步</button>
+      </div>
+      <div id="selfFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step3" class="card lesson-step">
+      <h2>Step 3｜驗收問題</h2>
+      <p>答對 2 / 3，就代表你抓到主幹。</p>
+      <div class="q" data-answer="c">
+        <h3>1. 哪一句最能描述 workflow 與 context engineering 的關係？</h3>
+        <button class="quiz-option" data-choice="a">Workflow 負責寫 prompt，context engineering 負責選模型</button>
+        <button class="quiz-option" data-choice="b">兩者互不相干，一個是理論，一個是實作</button>
+        <button class="quiz-option" data-choice="c">Workflow 決定步驟，context engineering 決定每一步該看到什麼資訊</button>
+      </div>
+      <div class="q" data-answer="a">
+        <h3>2. 為什麼說 context engineering 不是只有 prompt 技巧？</h3>
+        <button class="quiz-option" data-choice="a">因為多步驟任務中，每一步都要重新決定保留、壓縮、交接哪些資訊</button>
+        <button class="quiz-option" data-choice="b">因為 prompt 寫法已經完全沒用了</button>
+        <button class="quiz-option" data-choice="c">因為所有工具輸出都必須一字不漏保留</button>
+      </div>
+      <div class="q" data-answer="b">
+        <h3>3. 如果在「找資料 → 出大綱」之間做上下文設計，最合理的做法是？</h3>
+        <button class="quiz-option" data-choice="a">把所有搜尋結果原文全部塞給模型，越多越好</button>
+        <button class="quiz-option" data-choice="b">保留查到的核心結論與可信來源，去掉大部分噪音後再交給大綱步驟</button>
+        <button class="quiz-option" data-choice="c">完全不要保留任何前一步結果，重新開始</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
+        <button class="btn secondary" onclick="goStep(2)">回上一步</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step4" class="card lesson-step">
+      <h2>Step 4｜你的複習卡 + 我的見解</h2>
+      <div class="summary">
+        <div class="mini">
+          <h3>你的複習卡</h3>
+          <div id="userReviewCard" class="user-box">你在前面寫下的答案，會整理在這裡。</div>
+        </div>
+        <div class="mini">
+          <h3>龐德的見解</h3>
+          <p>很多人把 agent 系統做爛，不是模型不夠強，而是<strong>沒有把 workflow 與 context 一起設計</strong>。步驟亂切，資訊亂塞，最後模型像在霧裡開車。</p>
+          <p>真正好的設計，不是讓模型永遠知道全部，而是讓模型在每一步都知道<strong>現在最該知道的那一部分</strong>。</p>
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>最後一句話</h3>
+        <p><strong>Workflow 決定做事順序，Context Engineering 決定每一步看到的資訊；兩者一起設計，agent 才會穩。</strong></p>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="goStep(3)">回測驗</button>
+        <button class="btn primary" onclick="location.href='lesson-03.html'">前往 Lesson 3</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    let currentStep = 1;
+    let savedAnswer = '';
+    function goStep(step){
+      currentStep = step;
+      document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));
+      document.getElementById('step'+step).classList.add('active');
+      document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));
+      document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');
+      document.getElementById('progressBar').style.width = (step*25)+'%';
+      document.getElementById('progressLabel').textContent = '目前進度：' + step + ' / 4';
+      if(step===4){ document.getElementById('userReviewCard').textContent = savedAnswer || '你還沒有留下答案。'; }
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    function reviewAnswer(){
+      const text=document.getElementById('selfExplain').value.trim();
+      const box=document.getElementById('selfFeedback');
+      if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先用你的話講，這課不是背稿。';return;}
+      savedAnswer = text;
+      let notes=[];
+      if(!(text.includes('步驟')||text.includes('流程')||text.includes('workflow'))) notes.push('補一句：workflow 管的是步驟與順序。');
+      if(!(text.includes('資訊')||text.includes('上下文')||text.includes('交接'))) notes.push('補一句：context engineering 管的是每一步到底拿到哪些資訊。');
+      if(!(text.includes('prompt')||text.includes('不是只有'))) notes.push('再補一句：它不是只有 prompt，而是多步驟中的資訊配置。');
+      box.className='feedback ok'; box.style.display='block';
+      box.innerHTML='收到，你的版本已保留。' + (notes.length?'<br><br>'+notes.join('<br>'):'<br><br>方向正確，你已經把骨架抓到了。') + '<br><br>進驗收。';
+      setTimeout(()=>goStep(3),500);
+    }
+    document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
+    function gradeQuiz(){
+      const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;
+      qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;} if(s.dataset.choice===q.dataset.answer)score++;});
+      const box=document.getElementById('quizFeedback');
+      if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}
+      if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。'; setTimeout(()=>goStep(4),500);} else {box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}
+    }
+  </script>
+</body>
+</html>

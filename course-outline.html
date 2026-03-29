@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>教學專案｜課程總綱</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--soft:#eef4ff}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+    .wrap{max-width:1080px;margin:0 auto;padding:24px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 8px 24px rgba(23,35,58,.05)}
+    h1,h2,h3,h4{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)} .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--soft);color:var(--primary);font-size:12px;font-weight:700}
+    .module{border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:14px}.lesson{margin-top:12px;padding:14px;border-radius:14px;background:#fafbfe;border:1px solid var(--line)}
+    .btn{display:inline-block;text-decoration:none;color:#fff;background:var(--primary);padding:10px 14px;border-radius:10px;font-weight:700;margin-right:10px}.ghost{background:#fff;color:var(--text);border:1px solid var(--line)} a.link{color:var(--primary)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="card">
+      <div class="pill">課程總綱 / v2</div>
+      <h1>學習頻道內容並教會奇哥｜課程總綱</h1>
+      <p>這版已經從只有 module，升級成 <strong>Module → Lesson → 對應影片來源</strong>。課不是照影片數量硬切，而是照概念單元切；但每堂課都要回得出影片來源。</p>
+      <a class="btn" href="./index.html">回課程入口</a>
+      <a class="btn ghost" href="../../index.html">回總入口</a>
+    </section>
+
+    <section class="card">
+      <h2>目前課程規模（v1）</h2>
+      <ul>
+        <li><strong>4 個主階段</strong></li>
+        <li><strong>10 個 Module</strong></li>
+        <li><strong>第一版規劃 18～24 個 Lesson</strong></li>
+        <li>切課原則：以概念單元切，不硬綁一支影片只做一課</li>
+      </ul>
+      <p>目標頻道：<a class="link" href="https://youtube.com/@hungyileentu?si=jYgMT_z83ZHtniiq" target="_blank" rel="noreferrer">Hung-yi Lee YouTube 頻道</a></p>
+    </section>
+
+    <section class="card">
+      <h2>第一階段主線：AI Agent / Context Engineering / OpenClaw</h2>
+      <div class="module">
+        <h3>Module 1｜Context Engineering 基本概念</h3>
+        <p>定位：第一階段起點，先理解 Agent 為什麼需要上下文工程。</p>
+        <div class="lesson">
+          <h4><a class="link" href="./lesson-01.html">Lesson 1｜Context Engineering 是什麼？</a></h4>
+          <p>學習目標：理解概念、知道為什麼不能全塞、能用自己的話解釋。</p>
+          <p>對應影片：AI Agent (1/3)：核心技術 Context Engineering 基本概念解說</p>
+          <p>來源：頻道主線規劃 + Lesson 1 已上線（完整版）</p>
+        </div>
+        <div class="lesson">
+          <h4><a class="link" href="./lesson-02.html">Lesson 2｜上下文工程與工作流的關係</a></h4>
+          <p>學習目標：理解 context engineering 不只是 prompt，而是 workflow 設計的一部分。</p>
+          <p>對應影片：【生成式人工智慧與機器學習導論2025】第 2 講：上下文工程 (Context Engineering)</p>
+          <p>狀態：<strong>完整版已上線</strong>（高密度講解／你先說／驗收／複習卡）</p>
+        </div>
+      </div>
+
+      <div class="module">
+        <h3>Module 2｜AI Agent 之間可以怎麼互動</h3>
+        <p>定位：從單一 agent 往多 agent 與 handoff 延伸。</p>
+        <div class="lesson">
+          <h4><a class="link" href="./lesson-03.html">Lesson 3｜單 Agent 與多 Agent 的差別</a></h4>
+          <p>對應影片：AI Agent (2/3)：AI Agent 之間可以有什麼樣的互動</p>
+          <p>狀態：<strong>完整版已上線</strong>（單/多 agent 判斷框架、成本與分工）</p>
+        </div>
+        <div class="lesson">
+          <h4><a class="link" href="./lesson-04.html">Lesson 4｜Handoff / 分工 / 上下文交接</a></h4>
+          <p>對應影片：AI Agent (2/3)：AI Agent 之間可以有什麼樣的互動</p>
+          <p>狀態：<strong>完整版已上線</strong>（handoff 本質、交接結構、失真風險）</p>
+        </div>
+      </div>
+
+      <div class="module">
+        <h3>Module 3｜AI Agent 對工作的衝擊</h3>
+        <div class="lesson">
+          <h4><a class="link" href="./lesson-05.html">Lesson 5｜AI Agent 改變了什麼工作方式？</a></h4>
+          <p>對應影片：AI Agent (3/3)：AI Agent 對於工作帶來的衝擊</p>
+          <p>狀態：<strong>完整版已上線</strong>（工作切法、角色轉移、驗收重要性）</p>
+        </div>
+        <div class="lesson">
+          <h4><a class="link" href="./lesson-06.html">Lesson 6｜哪些工作會被放大、哪些會被取代？</a></h4>
+          <p>對應影片：AI Agent (3/3)：AI Agent 對於工作帶來的衝擊</p>
+        </div>
+      </div>
+
+      <div class="module">
+        <h3>Module 4｜以 OpenClaw 為例拆解 AI Agent 運作原理</h3>
+        <div class="lesson">
+          <h4><a class="link" href="./lesson-07.html">Lesson 7｜OpenClaw 的 agent workflow 長什麼樣？</a></h4>
+          <p>對應影片：解剖小龍蝦 — 以 OpenClaw 為例介紹 AI Agent 的運作原理</p>
+        </div>
+        <div class="lesson">
+          <h4><a class="link" href="./lesson-08.html">Lesson 8｜工具、記憶、workflow 如何串起來？</a></h4>
+          <p>對應影片：解剖小龍蝦 — 以 OpenClaw 為例介紹 AI Agent 的運作原理</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>第二階段主線：生成式 AI 導論 2025</h2>
+      <div class="module">
+        <h3>Module 5｜第 0 講～第 4 講骨幹理解</h3>
+        <div class="lesson"><h4><a class="link" href="./lesson-09.html">Lesson 9｜第 0 講核心地圖</a></h4><p>對應影片：生成式人工智慧與機器學習導論 2025 第 0 講</p></div>
+        <div class="lesson"><h4><a class="link" href="./lesson-10.html">Lesson 10｜第 1 講核心問題</a></h4><p>對應影片：生成式人工智慧與機器學習導論 2025 第 1 講</p></div>
+        <div class="lesson"><h4><a class="link" href="./lesson-11.html">Lesson 11｜第 2 講上下文工程</a></h4><p>對應影片：生成式人工智慧與機器學習導論 2025 第 2 講</p></div>
+        <div class="lesson"><h4><a class="link" href="./lesson-12.html">Lesson 12｜第 3～4 講概念骨架</a></h4><p>對應影片：生成式人工智慧與機器學習導論 2025 第 3、4 講</p></div>
+      </div>
+
+      <div class="module">
+        <h3>Module 6｜上下文工程與模型能力的關係</h3>
+        <div class="lesson"><h4><a class="link" href="./lesson-13.html">Lesson 13｜模型能力 vs 工作流能力</a></h4><p>對應來源：AI Agent 主線 + 導論 2025 第 2 講</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>第三階段主線：模型能力操作</h2>
+      <div class="module">
+        <h3>Module 7｜LLM / Fine-tuning / Model Editing / Model Merging</h3>
+        <div class="lesson"><h4><a class="link" href="./lesson-14.html">Lesson 14｜Fine-tuning 是在做什麼？</a></h4><p>對應主題：Fine-tuning</p></div>
+        <div class="lesson"><h4><a class="link" href="./lesson-15.html">Lesson 15｜Model Editing / Merging 差在哪？</a></h4><p>對應主題：Model Editing / Model Merging</p></div>
+      </div>
+      <div class="module">
+        <h3>Module 8｜Evaluation / Test-Time Training / 實務驗收</h3>
+        <div class="lesson"><h4><a class="link" href="./lesson-16.html">Lesson 16｜模型驗收怎麼做？</a></h4><p>對應主題：Evaluation</p></div>
+        <div class="lesson"><h4><a class="link" href="./lesson-17.html">Lesson 17｜Test-Time Training 的位置</a></h4><p>對應主題：Test-Time Training</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>第四階段主線：模態延伸</h2>
+      <div class="module">
+        <h3>Module 9｜語音語言模型</h3>
+        <div class="lesson"><h4><a class="link" href="./lesson-18.html">Lesson 18｜語音語言模型骨架</a></h4><p>對應主題：語音語言模型</p></div>
+      </div>
+      <div class="module">
+        <h3>Module 10｜Diffusion / Flow-matching / 影像生成</h3>
+        <div class="lesson"><h4><a class="link" href="./lesson-19.html">Lesson 19｜Diffusion / Flow-matching 的位置</a></h4><p>對應主題：Diffusion / Flow-matching</p></div>
+        <div class="lesson"><h4><a class="link" href="./lesson-20.html">Lesson 20｜生成模型跨到影像</a></h4><p>對應主題：影像生成</p></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>切課原則</h2>
+      <ul>
+        <li>不是一支影片一定只拆一個 lesson。</li>
+        <li>如果一支影片知識密度高，可以拆成多課。</li>
+        <li>如果多支影片其實在講同一概念，可以合成一課。</li>
+        <li>每個 lesson 都要附對應影片 / 主題來源，不能變成無來源整理。</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

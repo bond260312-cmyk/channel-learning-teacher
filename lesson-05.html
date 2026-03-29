@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奇哥 AI 學習站｜Lesson 5</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="topbar">
+      <div class="pill">Lesson 5 / AI Agent × Work Change</div>
+      <h1>Lesson 5｜AI Agent 改變了什麼工作方式？</h1>
+      <p>這一課要抓到的不是口號式「AI 來了」，而是更實際的一句：<strong>AI agent 改變的，不只是速度，而是工作的切法、人的角色、驗收方式與責任分配。</strong></p>
+      <div class="progress">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
+      </div>
+      <div class="step-nav">
+        <div class="step-chip active" data-step-chip="1">1 講解</div>
+        <div class="step-chip" data-step-chip="2">2 你先說</div>
+        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="4">4 複習卡</div>
+      </div>
+      <a class="back-link" href="./index.html">← 回課程入口</a>
+      <a class="back-link" style="margin-left:12px" href="../../index.html">← 回總入口</a>
+    </section>
+
+    <section id="step1" class="card lesson-step active">
+      <h2>Step 1｜先看工作方式怎麼被改寫</h2>
+      <div class="quote"><strong>一句話版本：</strong> AI agent 不是只幫你省幾分鐘，而是把很多工作從「人親手逐步做」改成「人設計流程、分派任務、檢查結果、處理例外」。</div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>第一個改變：工作的單位變了</h3>
+        <p>以前很多知識工作，是人一段一段親自做：找資料、整理、寫稿、改稿、送出。現在有 agent 之後，越來越多工作會改成：<strong>你先定義目標與標準，再把多個步驟交給系統跑，自己站在上游規劃與下游驗收。</strong></p>
+        <p>也就是說，工作的最小單位從「執行一個動作」慢慢轉向「設計一段流程」。</p>
+      </div>
+      <div class="two-col" style="margin-top:16px">
+        <div class="note-box">
+          <h3>以前常見的人工作法</h3>
+          <ul class="dense-list">
+            <li>自己蒐集資料</li>
+            <li>自己逐段比較</li>
+            <li>自己整理成草稿</li>
+            <li>自己逐輪修正</li>
+            <li>時間花在大量中間工序</li>
+          </ul>
+        </div>
+        <div class="note-box">
+          <h3>有 agent 後更像什麼</h3>
+          <ul class="dense-list">
+            <li>先定任務範圍與驗收標準</li>
+            <li>讓 agent 先做搜尋、整理、初稿、比對</li>
+            <li>人類重點審核關鍵結論與風險</li>
+            <li>把例外情況與關鍵判斷保留給人</li>
+            <li>時間轉移到規劃、判斷、驗收</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>第二個改變：人類角色從執行者轉向指揮者</h3>
+        <p>這不代表人沒價值，反而代表人的價值往上移。真正重要的能力，會更偏向：</p>
+        <ul class="dense-list">
+          <li>定義問題：你到底要系統解什麼，不解什麼。</li>
+          <li>設計流程：哪些步驟給 agent，哪些一定要人看。</li>
+          <li>設驗收標準：什麼叫做可交付，不只是看起來像完成。</li>
+          <li>抓例外與風險：知道哪裡最容易幻覺、失真、越界。</li>
+        </ul>
+        <p>所以未來不是只比誰做得快，而是比誰<strong>能把人機協作流程設計得更穩</strong>。</p>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>第三個改變：驗收比產出更重要</h3>
+        <p>以前你自己做，過程大多在自己腦中。現在 agent 幫你做很多步，產出速度變快，但也更容易一口氣做錯很多。這代表新的工作瓶頸不是「做不出來」，而是<strong>怎麼驗收得夠快、夠準、夠有層次</strong>。</p>
+        <p>成熟的工作流不會只問「做完了嗎」，而會問：</p>
+        <ol class="dense-list">
+          <li>這份結果有沒有符合原目標？</li>
+          <li>有沒有引用錯、理解錯、漏掉限制？</li>
+          <li>哪些環節可以自動驗，哪些一定要人工把關？</li>
+        </ol>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>第四個改變：組織中的價值會重新分配</h3>
+        <p>能被完整規則化、標準化、切成流程的部分，更容易被放大或自動化；而需要高風險判斷、跨脈絡協調、真實責任承擔的部分，人仍然很重要。</p>
+        <p>所以 agent 對工作的衝擊，不是單純「誰消失」，而是<strong>誰還只會做中間工序，誰已經升級成能設計系統與驗收系統的人</strong>。</p>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
+    </section>
+
+    <section id="step2" class="card lesson-step">
+      <h2>Step 2｜你先說</h2>
+      <p>請你回答：</p>
+      <ul class="dense-list">
+        <li>AI agent 改變的，為什麼不只是「做更快」？</li>
+        <li>你認為人類角色會從哪裡移到哪裡？</li>
+        <li>如果放到你的工作情境，哪一段最適合交給 agent，哪一段一定要人守住？</li>
+      </ul>
+      <textarea id="selfExplain" placeholder="先講你的版本。可直接代入你的工作流，不用抽象。"></textarea>
+      <div class="actions">
+        <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
+        <button class="btn secondary" onclick="goStep(1)">回上一步</button>
+      </div>
+      <div id="selfFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step3" class="card lesson-step">
+      <h2>Step 3｜驗收問題</h2>
+      <p>答對 2 / 3 就過關。</p>
+      <div class="q" data-answer="b">
+        <h3>1. AI agent 對工作的主要改變，哪句最準？</h3>
+        <button class="quiz-option" data-choice="a">只有把同樣工作做得更快，其他都不變</button>
+        <button class="quiz-option" data-choice="b">把工作重心從手工執行，移向流程設計、驗收與例外處理</button>
+        <button class="quiz-option" data-choice="c">代表之後完全不需要人類判斷</button>
+      </div>
+      <div class="q" data-answer="c">
+        <h3>2. 有 agent 後，人類價值更往哪裡移？</h3>
+        <button class="quiz-option" data-choice="a">只剩打字速度</button>
+        <button class="quiz-option" data-choice="b">只剩最後按送出</button>
+        <button class="quiz-option" data-choice="c">問題定義、流程設計、驗收標準、例外風險判斷</button>
+      </div>
+      <div class="q" data-answer="a">
+        <h3>3. 為什麼「驗收」在 agent 時代變得更重要？</h3>
+        <button class="quiz-option" data-choice="a">因為系統可以很快產出大量結果，做錯時也可能一次錯很多</button>
+        <button class="quiz-option" data-choice="b">因為有 agent 後就不需要產出品質了</button>
+        <button class="quiz-option" data-choice="c">因為驗收只是讓流程看起來更正式</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
+        <button class="btn secondary" onclick="goStep(2)">回上一步</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step4" class="card lesson-step">
+      <h2>Step 4｜你的複習卡 + 我的見解</h2>
+      <div class="summary">
+        <div class="mini">
+          <h3>你的複習卡</h3>
+          <div id="userReviewCard" class="user-box">你在前面寫下的答案，會整理在這裡。</div>
+        </div>
+        <div class="mini">
+          <h3>龐德的見解</h3>
+          <p>AI agent 最深的衝擊，不是叫每個人少做事，而是逼每個人升級：<strong>從做工的人，升成定義規則、管理品質、承擔結果的人。</strong></p>
+          <p>會被放大的，不只是技術，而是能把流程設計清楚、把驗收做紮實的人。這不是世界末日，是職能重排。</p>
+        </div>
+      </div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>最後一句話</h3>
+        <p><strong>AI agent 改變的不是單一步驟，而是整套工作分工：人更像導演，agent 更像可調度的執行團隊。</strong></p>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="goStep(3)">回測驗</button>
+        <button class="btn primary" onclick="location.href='lesson-06.html'">前往 Lesson 6</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    let currentStep = 1;
+    let savedAnswer = '';
+    function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('流程')||text.includes('工作流')||text.includes('切法'))) notes.push('補一句：agent 改變的不只速度，還有工作流程的切法。');if(!(text.includes('驗收')||text.includes('審核')||text.includes('標準'))) notes.push('補一句：有 agent 後，驗收與標準設定的重要性大幅上升。');if(!(text.includes('規劃')||text.includes('指揮')||text.includes('設計'))) notes.push('再補一句：人類角色更往規劃、設計、判斷移動。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>你已經抓到這課不是速度論，而是角色重排。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
+    function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
+  </script>
+</body>
+</html>

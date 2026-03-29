@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>奇哥 AI 學習站｜Lesson 14</title>
+  <style>
+    :root{--bg:#f7f8fc;--panel:#fff;--text:#17233a;--muted:#5d6b82;--line:#e6eaf2;--primary:#1865f2;--primary-soft:#eef4ff;--ok:#14804a;--ok-soft:#eaf8f0;--warn:#b76e00;--warn-soft:#fff5e6}
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}.wrap{max-width:1020px;margin:0 auto;padding:24px}.topbar,.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,35,58,.05)}.topbar{padding:20px 24px;margin:20px 0}.card{padding:22px;margin:16px 0}h1,h2,h3{margin:0 0 12px;line-height:1.2}p,li{color:var(--muted)}.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:700}.progress{margin-top:14px}.progress-track{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden}.progress-bar{height:100%;width:25%;background:var(--primary);transition:width .25s ease}.progress-label{font-size:13px;color:var(--muted);margin-top:8px}.step-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.step-chip{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--muted);font-size:13px;text-align:center;font-weight:700}.step-chip.active{border-color:var(--primary);background:var(--primary-soft);color:var(--primary)}.lesson-step{display:none}.lesson-step.active{display:block}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}textarea{width:100%;min-height:140px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;resize:vertical;background:#fff;color:var(--text)}.feedback{margin-top:14px;padding:14px;border-radius:14px;display:none}.feedback.ok{display:block;background:var(--ok-soft);color:var(--ok)}.feedback.warn{display:block;background:var(--warn-soft);color:var(--warn)}.quiz-option{display:block;width:100%;text-align:left;padding:14px;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);cursor:pointer;font-weight:600}.quiz-option.selected{border-color:var(--primary);background:var(--primary-soft)}.summary{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.summary .mini,.note-box{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.back-link{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:700}.dense-list li{margin:10px 0}.quote{padding:14px 16px;border-left:4px solid var(--primary);background:var(--primary-soft);border-radius:12px;color:#234}.user-box{white-space:pre-wrap}.two-col{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}@media (max-width:760px){.step-nav,.summary,.two-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="topbar">
+      <div class="pill">Lesson 14 / Fine-Tuning</div>
+      <h1>Lesson 14｜Fine-tuning 是在做什麼？</h1>
+      <p>客戶常說：「能不能把我們的資料倒給 AI，讓它『訓練』成我們的專屬模型？」這堂課我們來拆解這個迷思：Fine-tuning (微調) 到底是在學知識，還是在學語氣？</p>
+      <div class="progress">
+        <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="progressLabel" class="progress-label">目前進度：1 / 4</div>
+      </div>
+      <div class="step-nav">
+        <div class="step-chip active" data-step-chip="1">1 講解</div>
+        <div class="step-chip" data-step-chip="2">2 你先說</div>
+        <div class="step-chip" data-step-chip="3">3 驗收</div>
+        <div class="step-chip" data-step-chip="4">4 複習卡</div>
+      </div>
+      <a class="back-link" href="./index.html">← 回課程入口</a>
+    </section>
+
+    <section id="step1" class="card lesson-step active">
+      <h2>Step 1｜微調的本質：學語氣與格式，不是學知識</h2>
+      <div class="quote"><strong>一句話版本：</strong> Fine-tuning 就像是送一個已經懂很多知識的大學生去「上禮儀課」，讓他學會用你們公司的「專屬格式和語氣」講話。它不是用來背整本產品型錄的。</div>
+      <div class="note-box" style="margin-top:16px">
+        <h3>1. 最常見的錯誤期待</h3>
+        <p>很多人以為，把公司 10 年的財報和產品手冊拿去 Fine-tune (微調)，模型就會變成「公司百科全書」。<strong>這是錯的。</strong></p>
+        <p>模型在微調時確實會記住一些知識，但非常容易產生幻覺。當你問它去年的營收，它可能會自己「接龍」出一個假數字。要讓模型讀公司手冊，應該用 RAG（Lesson 11）把資料貼進上下文裡，而不是用微調。</p>
+      </div>
+      <div class="two-col" style="margin-top:16px">
+        <div class="note-box">
+          <h3>2. 那 Fine-tuning 到底用在哪？</h3>
+          <p>微調最適合用來「統一輸出的格式與語氣（Tone of Voice）」。例如：</p>
+          <ul class="dense-list">
+            <li>讓它回覆客服信件時，永遠帶有「VIYANG 水晶岩盤浴」那種高質感的賽博玄學風格。</li>
+            <li>讓它產出特定格式的 JSON 程式碼。</li>
+            <li>你需要準備幾百到幾千筆高品質的「輸入-輸出 (Q&A) 範例」來改變它的神經網路權重。</li>
+          </ul>
+        </div>
+        <div class="note-box">
+          <h3>3. RAG vs Fine-tuning 怎麼選？</h3>
+          <ul class="dense-list">
+            <li><strong>缺外部知識（要查事實）：</strong> 用 RAG (檢索增強生成)。</li>
+            <li><strong>缺專屬語氣（要定風格）：</strong> 用 Fine-tuning。</li>
+            <li><strong>兩者都缺：</strong> RAG + Fine-tuning 雙管齊下。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="actions"><button class="btn primary" onclick="goStep(2)">下一步：換你講</button></div>
+    </section>
+
+    <section id="step2" class="card lesson-step">
+      <h2>Step 2｜你先說</h2>
+      <p>請你回答：</p>
+      <ul class="dense-list">
+        <li>如果客戶有一份最新的「2026 員工請假規定」PDF，希望 AI 能根據這份文件回答員工問題。你會建議他做 Fine-tuning 還是 RAG？為什麼？</li>
+      </ul>
+      <textarea id="selfExplain" placeholder="代入你對客戶提案時的建議與理由。"></textarea>
+      <div class="actions">
+        <button class="btn primary" onclick="reviewAnswer()">送出，給我回饋</button>
+        <button class="btn secondary" onclick="goStep(1)">回上一步</button>
+      </div>
+      <div id="selfFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step3" class="card lesson-step">
+      <h2>Step 3｜驗收問題</h2>
+      <p>答對 2 / 3 就過關。</p>
+      <div class="q" data-answer="b">
+        <h3>1. Fine-tuning (微調) 最適合解決哪種問題？</h3>
+        <button class="quiz-option" data-choice="a">讓模型記住公司所有產品的最新報價單</button>
+        <button class="quiz-option" data-choice="b">讓模型學會特定的回覆語氣、風格或固定輸出的 JSON 格式</button>
+        <button class="quiz-option" data-choice="c">讓模型學會連線上網</button>
+      </div>
+      <div class="q" data-answer="c">
+        <h3>2. 如果試圖用 Fine-tuning 來讓模型「死背」外部知識，最可能發生什麼問題？</h3>
+        <button class="quiz-option" data-choice="a">模型會完美回答所有問題</button>
+        <button class="quiz-option" data-choice="b">模型會跑得特別快</button>
+        <button class="quiz-option" data-choice="c">模型非常容易產生幻覺 (Hallucination)，自己憑空捏造看似合理的錯誤資料</button>
+      </div>
+      <div class="q" data-answer="a">
+        <h3>3. 當我們需要 AI 能準確回答「公司昨天的最新公告」時，應該使用哪種技術？</h3>
+        <button class="quiz-option" data-choice="a">RAG (檢索增強生成)，把公告內容塞進提示詞上下文裡</button>
+        <button class="quiz-option" data-choice="b">Fine-tuning (微調)，重新訓練模型權重</button>
+        <button class="quiz-option" data-choice="c">Pre-training (預訓練)，重頭教模型認字</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" onclick="gradeQuiz()">送出測驗</button>
+        <button class="btn secondary" onclick="goStep(2)">回上一步</button>
+      </div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+
+    <section id="step4" class="card lesson-step">
+      <h2>Step 4｜你的複習卡 + 我的見解</h2>
+      <div class="summary">
+        <div class="mini">
+          <h3>你的複習卡</h3>
+          <div id="userReviewCard" class="user-box">你在前面寫下的答案，會整理在這裡。</div>
+        </div>
+        <div class="mini">
+          <h3>龐德的見解</h3>
+          <p>不要再被市場上那些亂賣「企業專屬模型訓練」的噱頭騙了。真正的架構師知道：<strong>知識交給資料庫與 RAG，大腦交給基礎模型，微調只用來塑型外觀。</strong></p>
+          <p>這個觀念能幫你省下大筆冤枉錢，也能在提案時瞬間建立無法被挑戰的專業度。</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn secondary" onclick="goStep(3)">回測驗</button>
+        <button class="btn primary" onclick="location.href='lesson-15.html'">前往 Lesson 15</button>
+      </div>
+    </section>
+  </div>
+  <script>
+    let currentStep = 1;
+    let savedAnswer = '';
+    function goStep(step){currentStep=step;document.querySelectorAll('.lesson-step').forEach(el=>el.classList.remove('active'));document.getElementById('step'+step).classList.add('active');document.querySelectorAll('.step-chip').forEach(el=>el.classList.remove('active'));document.querySelector('[data-step-chip="'+step+'"]').classList.add('active');document.getElementById('progressBar').style.width=(step*25)+'%';document.getElementById('progressLabel').textContent='目前進度：'+step+' / 4';if(step===4){document.getElementById('userReviewCard').textContent=savedAnswer||'你還沒有留下答案。';}window.scrollTo({top:0,behavior:'smooth'});}
+    function reviewAnswer(){const text=document.getElementById('selfExplain').value.trim();const box=document.getElementById('selfFeedback');if(!text){box.className='feedback warn';box.style.display='block';box.innerHTML='先說出你的觀點，再往下。';return;}savedAnswer=text;let notes=[];if(!(text.includes('RAG')||text.includes('檢索')||text.includes('上下文'))) notes.push('提醒：對於即時變動的規定文件，必須使用 RAG。');if(!(text.includes('幻覺')||text.includes('背知識')||text.includes('語氣'))) notes.push('提醒：微調用來背知識容易產生幻覺，微調是拿來定語氣的。');box.className='feedback ok';box.style.display='block';box.innerHTML='收到，你的版本已保留。'+(notes.length?'<br><br>'+notes.join('<br>'):'<br><br>完全正確，RAG 才是處理知識庫的正解。')+'<br><br>現在進驗收。';setTimeout(()=>goStep(3),500);}
+    document.querySelectorAll('.quiz-option').forEach(btn=>{btn.addEventListener('click',()=>{btn.parentElement.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');});});
+    function gradeQuiz(){const qs=[...document.querySelectorAll('.q')];let score=0,unanswered=0;qs.forEach(q=>{const s=q.querySelector('.quiz-option.selected');if(!s){unanswered++;return;}if(s.dataset.choice===q.dataset.answer)score++;});const box=document.getElementById('quizFeedback');if(unanswered){box.className='feedback warn';box.style.display='block';box.innerHTML='還有 '+unanswered+' 題沒答。';return;}if(score>=2){box.className='feedback ok';box.style.display='block';box.innerHTML='你答對 '+score+'/3，過關。';setTimeout(()=>goStep(4),500);}else{box.className='feedback warn';box.style.display='block';box.innerHTML='你答對 '+score+'/3，還沒過。回 Step 1 再看一次。';}}
+  </script>
+</body>
+</html>
